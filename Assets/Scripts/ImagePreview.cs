@@ -230,33 +230,33 @@ public class ImagePreview : MonoBehaviour
 
 	public void Reinit()
 	{
-		if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
-		{
-			this.m_adLocked.SetActive(false);
-			if (this.m_adLocked_mozaic != null)
-				this.m_adLocked_mozaic.SetActive(false);
-			this.m_adLocked.GetComponent<Image>().enabled = false;
-		}
-		else if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old)
-		{
-			this.m_adLocked.SetActive(this.m_imageInfo.AccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id));
-		}
-		else if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed)
-		{
-			this.m_adLocked.SetActive(this.m_imageInfo.AccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id));
-			if (!this.m_adLocked.activeInHierarchy)
-			{
-				if (this.m_adLocked_mozaic != null)
-					this.m_adLocked_mozaic.SetActive(false);
-				this.m_adLocked.GetComponent<Image>().enabled = false;
-			}
-		}
-		else
-		{
-			bool active = this.m_imageInfo.CustomAccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id);
-			this.m_locked.SetActive(active);
-			//this.m_adLocked_mozaic_other_group.SetActive(active);
-		}
+		// if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
+		// {
+		// 	this.m_adLocked.SetActive(false);
+		// 	if (this.m_adLocked_mozaic != null)
+		// 		this.m_adLocked_mozaic.SetActive(false);
+		// 	this.m_adLocked.GetComponent<Image>().enabled = false;
+		// }
+		// else if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old)
+		// {
+		// 	this.m_adLocked.SetActive(this.m_imageInfo.AccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id));
+		// }
+		// else if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed)
+		// {
+		// 	this.m_adLocked.SetActive(this.m_imageInfo.AccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id));
+		// 	if (!this.m_adLocked.activeInHierarchy)
+		// 	{
+		// 		if (this.m_adLocked_mozaic != null)
+		// 			this.m_adLocked_mozaic.SetActive(false);
+		// 		this.m_adLocked.GetComponent<Image>().enabled = false;
+		// 	}
+		// }
+		// else
+		// {
+		// 	bool active = this.m_imageInfo.CustomAccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id);
+		// 	this.m_locked.SetActive(active);
+		// 	//this.m_adLocked_mozaic_other_group.SetActive(active);
+		// }
 	}
 
 	public void Click()

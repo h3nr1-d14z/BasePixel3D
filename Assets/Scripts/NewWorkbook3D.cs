@@ -85,7 +85,7 @@ public class NewWorkbook3D : BaseWindow
 			ShareWindow shareWindow = WindowManager.Instance.OpenShareWindow();
 			shareWindow.Init(swd);
 			AudioManager.Instance.PlayClick();
-			AdsWrapper.Instance.ShowInterOrRate("end_level");
+			// AdsWrapper.Instance.ShowInterOrRate("end_level");
 		});
 	}
 
@@ -95,7 +95,7 @@ public class NewWorkbook3D : BaseWindow
 		{
 			this.Exit();
 		});
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 		AudioManager.Instance.PlayClick();
 	}
 
@@ -106,9 +106,9 @@ public class NewWorkbook3D : BaseWindow
 	public void CloseCompletedPlateButtonClick()
 	{
 		this.m_completedPlane.SetActive(false);
-		AdsWrapper.Instance.ShowInterOrRate("end_level");
+		// AdsWrapper.Instance.ShowInterOrRate("end_level");
 		AudioManager.Instance.PlayClick();
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 	}
 
 	public void ShareButtonClick()
@@ -132,7 +132,7 @@ public class NewWorkbook3D : BaseWindow
 
 	public void Exit()
 	{
-		AdsWrapper.Instance.ShowInter("gamescreen_exit");
+		// AdsWrapper.Instance.ShowInter("gamescreen_exit");
 		MainManager.Instance.StartLibrary(MainMenu.LastPage);
 	}
 	private IEnumerator OpenCoroutine()

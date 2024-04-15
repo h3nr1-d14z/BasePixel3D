@@ -54,7 +54,7 @@ public class NewWorkbookManager : MonoBehaviour
 		WorkbookModel.Init();
 		CurrentColorModel currentColorModel = WorkbookModel.Instance.CurrentColorModel;
 		currentColorModel.OnStateChanged = (Action<CurrentColorModel, bool>)Delegate.Combine(currentColorModel.OnStateChanged, new Action<CurrentColorModel, bool>(this.OnCurrentColorChangedHandler));
-		AdsWrapper.Instance.RequestVideo();
+		// AdsWrapper.Instance.RequestVideo();
 	}
 
 	private void Start()
@@ -101,7 +101,7 @@ public class NewWorkbookManager : MonoBehaviour
 	public void Exit()
 	{
 		this.SaveWork(false);
-		AdsWrapper.Instance.ShowInter("gamescreen_exit");
+		// AdsWrapper.Instance.ShowInter("gamescreen_exit");
 		MainManager.Instance.StartLibrary(MainMenu.LastPage);
 	}
 
@@ -115,8 +115,8 @@ public class NewWorkbookManager : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		AdsWrapper.Instance.OnWorkbookUnload();
-		AnalyticsManager.Instance.ColoringSession((DateTime.Now - this.m_startSession).TotalSeconds);
+		// AdsWrapper.Instance.OnWorkbookUnload();
+		// AnalyticsManager.Instance.ColoringSession((DateTime.Now - this.m_startSession).TotalSeconds);
 		if (this.m_savedWorkData != null && this.m_savedWorkData.History2 != null)
 		{
 			this.m_savedWorkData.History2.Close();
@@ -131,11 +131,11 @@ public class NewWorkbookManager : MonoBehaviour
 				yield return null;
 				continue;
 			}
-			if (INPluginWrapper.Instance.IsAdShown())
-			{
-				yield return null;
-				continue;
-			}
+			// if (INPluginWrapper.Instance.IsAdShown())
+			// {
+			// 	yield return null;
+			// 	continue;
+			// }
 			if (this.m_imageInfo.Url != null)
 			{
 				DataManager.Instance.GetImageAsset(this.m_imageInfo, delegate (bool res, Texture2D tex)
@@ -143,7 +143,7 @@ public class NewWorkbookManager : MonoBehaviour
 					if ((UnityEngine.Object)tex == (UnityEngine.Object)null)
 					{
 						MainManager.Instance.StartLibrary(MainMenu.LastPage);
-						DialogToolWrapper.ShowNoInternetDialog();
+						// DialogToolWrapper.ShowNoInternetDialog();
 					}
 					else
 					{
@@ -159,7 +159,7 @@ public class NewWorkbookManager : MonoBehaviour
 					if ((UnityEngine.Object)tex == (UnityEngine.Object)null)
 					{
 						MainManager.Instance.StartLibrary(MainMenu.LastPage);
-						DialogToolWrapper.ShowNoInternetDialog();
+						// DialogToolWrapper.ShowNoInternetDialog();
 					}
 					else
 					{
@@ -180,31 +180,31 @@ public class NewWorkbookManager : MonoBehaviour
 		{
 			this.m_stopInit = false;
 		}
-		else
-		{
-			if (INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.None && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Old && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Revealed)
-			{ 
-				if (!IAPWrapper.Instance.NoAds && AppData.TutorialCompleted)
-				{
+		// else
+		// {
+		// 	if (INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.None && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Old && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Revealed)
+		// 	{ 
+		// 		if (!IAPWrapper.Instance.NoAds && AppData.TutorialCompleted)
+		// 		{
 					yield return new WaitForSeconds(0.1f);
-					if (AdsWrapper.Instance.ShowInter("preview"))
-					{
-						yield return new WaitForSeconds(1f); 
-					}
-				}
-			}
-			if (this.m_imageInfo != null && (this.m_imageInfo.CustomAccessStatus == AccessStatus.Free || IAPWrapper.Instance.Subscribed || AppData.UnlockedImages.Contains(this.m_imageInfo.Id)))
-			{
-				if (!IAPWrapper.Instance.NoAds && AppData.TutorialCompleted)
-				{
-					yield return new WaitForSeconds(0.1f);
-					if (AdsWrapper.Instance.ShowInter("preview"))
-					{
-						yield return new WaitForSeconds(1f); 
-					}
-				}
-			} 
-		}
+		// 			if (AdsWrapper.Instance.ShowInter("preview"))
+		// 			{
+		// 				yield return new WaitForSeconds(1f); 
+		// 			}
+		// 		}
+		// 	}
+		// 	if (this.m_imageInfo != null && (this.m_imageInfo.CustomAccessStatus == AccessStatus.Free || IAPWrapper.Instance.Subscribed || AppData.UnlockedImages.Contains(this.m_imageInfo.Id)))
+		// 	{
+		// 		if (!IAPWrapper.Instance.NoAds && AppData.TutorialCompleted)
+		// 		{
+		// 			yield return new WaitForSeconds(0.1f);
+		// 			if (AdsWrapper.Instance.ShowInter("preview"))
+		// 			{
+		// 				yield return new WaitForSeconds(1f); 
+		// 			}
+		// 		}
+		// 	} 
+		// }
 		this.m_stopInit = false;
 	}
 
@@ -215,42 +215,42 @@ public class NewWorkbookManager : MonoBehaviour
 		yield return null;
 
 		this.CameraManager.EnableBackCamera();
-		var video = false;
-		if ((INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed) && this.m_imageInfo.CustomAccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id))
-		{
-			this.m_videoWaiter.SetActive(true); 
+		// var video = false;
+		// if ((INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed) && this.m_imageInfo.CustomAccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id))
+		// {
+		// 	this.m_videoWaiter.SetActive(true); 
 			AppData.UnlockedImages.Add(this.m_imageInfo.Id); 
-			var timer = 7f; 
-
-			while (timer >= 0f)
-			{
-#if UNITY_EDITOR
-				video = true; 
-				AdsWrapper.Instance.ShowVideo("image", null);
-#elif UNITY_ANDROID
-				var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-                var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-                activity.Call("runOnUiThread", (AndroidJavaRunnable)delegate
-                {
-                    if (AdsWrapper.Instance.IsVideoAvailable())
-                    {
-                        video = true;
-                        AdsWrapper.Instance.ShowVideo("image", null);
-                    }
-                });
-#else
-				if (AdsWrapper.Instance.IsVideoAvailable())
-                {
-                    video = true;
-                    AdsWrapper.Instance.ShowVideo("image", null);
-                }
-#endif 
-				yield return new WaitForSeconds(1f);
-				if (video)
-					break;
-				timer -= 1f;
-			}
-		}
+// 			var timer = 7f; 
+//
+// 			while (timer >= 0f)
+// 			{
+// #if UNITY_EDITOR
+// 				video = true; 
+// 				AdsWrapper.Instance.ShowVideo("image", null);
+// #elif UNITY_ANDROID
+// 				var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+//                 var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+//                 activity.Call("runOnUiThread", (AndroidJavaRunnable)delegate
+//                 {
+//                     if (AdsWrapper.Instance.IsVideoAvailable())
+//                     {
+//                         video = true;
+//                         AdsWrapper.Instance.ShowVideo("image", null);
+//                     }
+//                 });
+// #else
+// 				if (AdsWrapper.Instance.IsVideoAvailable())
+//                 {
+//                     video = true;
+//                     AdsWrapper.Instance.ShowVideo("image", null);
+//                 }
+// #endif 
+// 				yield return new WaitForSeconds(1f);
+// 				if (video)
+// 					break;
+// 				timer -= 1f;
+// 			}
+		// }
 
 		var workbook = WindowManager.Instance.OpenWorkbook();
 		workbook.RemoveVideoWaiter();
@@ -274,7 +274,7 @@ public class NewWorkbookManager : MonoBehaviour
 			}
 		}
 		this.m_startSession = DateTime.Now;
-		AnalyticsManager.Instance.StartColoringSession();
+		// AnalyticsManager.Instance.StartColoringSession();
 		this.StartCoroutine(this.SaveWorkCoroutine());
 		yield break;
 	}

@@ -83,7 +83,7 @@ public class FilterWindow : BaseWindow
 			Vector2 min2 = uvRect.min;
 			uvRect.center = new Vector2(x, (min2.y + 1f) / 2f);
 		}
-		AnalyticsManager.Instance.FilterWindowOpened();
+		// AnalyticsManager.Instance.FilterWindowOpened();
 		this.m_savedWorkData = savedWorkData;
 		this.ReinitImage(uvRect);
 		if (this.m_filters == null)
@@ -371,7 +371,7 @@ public class FilterWindow : BaseWindow
 		ShareWindow shareWindow = WindowManager.Instance.OpenShareWindow();
 		shareWindow.Init(this.m_savedWorkData);
 		Texture2D filter = MainManager.Instance.FilterManager.GetFilter(this.m_currentIndex);
-		AnalyticsManager.Instance.FilterWindowClosed((!(filter == null)) ? filter.name : "none");
+		// AnalyticsManager.Instance.FilterWindowClosed((!(filter == null)) ? filter.name : "none");
 		AudioManager.Instance.PlayClick();
 	}
 
@@ -379,8 +379,8 @@ public class FilterWindow : BaseWindow
 	{
 		WindowManager.Instance.CloseMe(this);
 		Texture2D filter = MainManager.Instance.FilterManager.GetFilter(this.m_currentIndex);
-		AnalyticsManager.Instance.BackButtonClicked();
-		AnalyticsManager.Instance.FilterWindowClosed((!(filter == null)) ? filter.name : "none");
+		// AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.FilterWindowClosed((!(filter == null)) ? filter.name : "none");
 		AudioManager.Instance.PlayClick();
 	}
 

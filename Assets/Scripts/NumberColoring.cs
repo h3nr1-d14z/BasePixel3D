@@ -238,7 +238,7 @@ public class NumberColoring : MonoBehaviour
 		}));
 		base.StartCoroutine(this.DefferedEnableCoroutine());
 		this.m_highlightedGridRenderer.gameObject.SetActive(AppData.BulbMode);
-		AnalyticsManager.Instance.ImageOpened(this.m_imageInfo, this.m_colorsToColor, this.m_colors.Count, imageOpenType); 
+		// AnalyticsManager.Instance.ImageOpened(this.m_imageInfo, this.m_colorsToColor, this.m_colors.Count, imageOpenType); 
 	}
 
 	private void Update()
@@ -380,7 +380,7 @@ public class NumberColoring : MonoBehaviour
                 lhs.a = 0.5f;
                 if (!(lhs == color))
                 {
-                    AnalyticsManager.Instance.ElementColored(WorkbookModel.Instance.ColorizationModeModel.CurrentSpaceType, false);
+                    // AnalyticsManager.Instance.ElementColored(WorkbookModel.Instance.ColorizationModeModel.CurrentSpaceType, false);
                     pixelEqual = true;
                 }
             }
@@ -393,7 +393,7 @@ public class NumberColoring : MonoBehaviour
 		if (color.a > 0.9f)
 		{
 			VibroWrapper.PlayVibroRight();
-			AnalyticsManager.Instance.ElementColored(WorkbookModel.Instance.ColorizationModeModel.CurrentSpaceType, true);
+			// AnalyticsManager.Instance.ElementColored(WorkbookModel.Instance.ColorizationModeModel.CurrentSpaceType, true);
 			Color[] pixels = ((Texture2D)this.m_resMaterial.mainTexture).GetPixels();
 			Color[] pixels2 = ((Texture2D)this.m_grayRenderer.sharedMaterial.mainTexture).GetPixels();
 			if (WorkbookModel.Instance.SpecBoostersModel.LassoMode)
@@ -403,7 +403,7 @@ public class NumberColoring : MonoBehaviour
 				((Texture2D)this.m_resMaterial.mainTexture).Apply();
 				WorkbookModel.Instance.SpecBoostersModel.SpendLasso();
 				AudioManager.Instance.PlayWand();
-				AnalyticsManager.Instance.LassoUsed(WorkbookModel.Instance.SpecBoostersModel.LassoCount + 1);
+				// AnalyticsManager.Instance.LassoUsed(WorkbookModel.Instance.SpecBoostersModel.LassoCount + 1);
 			}
 			if (WorkbookModel.Instance.SpecBoostersModel.BombMode)
 			{
@@ -412,7 +412,7 @@ public class NumberColoring : MonoBehaviour
 				((Texture2D)this.m_resMaterial.mainTexture).Apply();
 				WorkbookModel.Instance.SpecBoostersModel.SpendBomb();
 				AudioManager.Instance.PlayBomb();
-				AnalyticsManager.Instance.BombUsed(WorkbookModel.Instance.SpecBoostersModel.BombCount + 1);
+				// AnalyticsManager.Instance.BombUsed(WorkbookModel.Instance.SpecBoostersModel.BombCount + 1);
 				foreach (Color color2 in this.m_colors)
 				{
 					this.CheckColor(color2, pixels, pixels2);
@@ -426,7 +426,7 @@ public class NumberColoring : MonoBehaviour
 			if (m_totalNumbers == 0)
 			{
 				this.Completed = true;
-				AnalyticsManager.Instance.ImageDone(this.m_imageInfo, this.m_colorsToColor, this.m_colors.Count);
+				// AnalyticsManager.Instance.ImageDone(this.m_imageInfo, this.m_colorsToColor, this.m_colors.Count);
 				this.OnComplete.SafeInvoke();
 				AudioManager.Instance.PlayVictory();
 			}

@@ -1,6 +1,6 @@
 #if UNITY_ANDROID
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
+// using GooglePlayGames;
+// using GooglePlayGames.BasicApi;
 #elif UNITY_IOS
 using UnityEngine.SocialPlatforms;
 using UnityEngine.SocialPlatforms.GameCenter;
@@ -200,9 +200,9 @@ public class LeaderboardScript : MonoBehaviour
 
     public void LeaderboardLogout()
 	{
-#if (UNITY_ANDROID || (UNITY_IPHONE && !NO_GPGS))
-		((GooglePlayGames.PlayGamesPlatform)Social.Active).SignOut();
-#endif
+// #if (UNITY_ANDROID || (UNITY_IPHONE && !NO_GPGS))
+// 		((GooglePlayGames.PlayGamesPlatform)Social.Active).SignOut();
+// #endif
     }
 
     public int GetChapterNumber(int postcardIndex)

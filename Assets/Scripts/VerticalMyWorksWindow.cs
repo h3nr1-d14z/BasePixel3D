@@ -178,35 +178,37 @@ public class VerticalMyWorksWindow : MonoBehaviour
 		{
 			imageInfo = savedWorkData.ImageInfo;
 		}
-		if (imageInfo.CustomAccessStatus == AccessStatus.Free || IAPWrapper.Instance.Subscribed)
+		if (imageInfo.CustomAccessStatus == AccessStatus.Free 
+		    // || IAPWrapper.Instance.Subscribed
+		    )
 		{
 			this.m_lock = true;
 			this.ClearPreviews();
 			ISavedWorkData savedWorkData2 = MainManager.Instance.SavedWorksList.LoadById(this.m_saveIds[this.m_currentImageIndex]);
 			MainManager.Instance.StartWorkbook(savedWorkData2.ImageInfo, ImageOpenType.Reopened, MainMenuPage.MyWorks, null);
 		}
-		else
-		{
-			NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
-			newInappsWindow.Init("image", null);
-		}
+		// else
+		// {
+		// 	NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
+		// 	newInappsWindow.Init("image", null);
+		// }
 	}
 
 	public void DeleteButtonClick()
 	{
-		if (this.m_currentImageIndex >= 0)
-		{
-			DialogToolWrapper.ShowDeleteDialog(delegate (bool res)
-			{
-				if (res)
-				{
-					MainManager.Instance.SavedWorksList.Delete(this.m_saveIds[this.m_currentImageIndex]);
-					this.m_currentImageIndex = -1;
-					this.m_lock = false;
-					this.Reinit();
-				}
-			});
-		}
+		// if (this.m_currentImageIndex >= 0)
+		// {
+		// 	DialogToolWrapper.ShowDeleteDialog(delegate (bool res)
+		// 	{
+		// 		if (res)
+		// 		{
+		// 			MainManager.Instance.SavedWorksList.Delete(this.m_saveIds[this.m_currentImageIndex]);
+		// 			this.m_currentImageIndex = -1;
+		// 			this.m_lock = false;
+		// 			this.Reinit();
+		// 		}
+		// 	});
+		// }
 	}
 
 	public void ShareButtonClick()

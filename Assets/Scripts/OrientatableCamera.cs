@@ -11,8 +11,8 @@ public class OrientatableCamera : MonoBehaviour
 	[SerializeField]
 	private float m_topUiSize;
 
-	[SerializeField]
-	private BannerSpace m_topPortraitOffset;
+	// [SerializeField]
+	// private BannerSpace m_topPortraitOffset;
 
 	private Camera m_mainCamera;
 

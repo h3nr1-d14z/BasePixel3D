@@ -174,15 +174,15 @@ public class DailyGame : MonoBehaviour
                             LevelProgressControl.control.SaveProgressData();
                         }
                         long score = Convert.ToInt64(this.timer);
-                        if (leaderBoardScript != null)
-                        {
-#if UNITY_ANDROID
-                            this.leaderBoardScript.ReportLeaderboardScore(score, GPGSIds.leaderboard_best_time);
-#else
-                            //pixelart_dailybest
-                            this.leaderBoardScript.ReportLeaderboardScore(score, "pixelart_dailybest");
-#endif
-                        }
+                        // if (leaderBoardScript != null)
+                        // {
+// #if UNITY_ANDROID
+//                             this.leaderBoardScript.ReportLeaderboardScore(score, GPGSIds.leaderboard_best_time);
+// #else
+//                             //pixelart_dailybest
+//                             this.leaderBoardScript.ReportLeaderboardScore(score, "pixelart_dailybest");
+// #endif
+                        // }
 						break;
 					}
 			}

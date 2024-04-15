@@ -120,7 +120,7 @@ public class HelpWindow : BaseWindow
 	public void CloseButtonClick()
 	{
 		WindowManager.Instance.CloseMe(this);
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 		AudioManager.Instance.PlayClick();
 	}
 

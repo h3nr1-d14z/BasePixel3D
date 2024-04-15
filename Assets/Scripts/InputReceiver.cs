@@ -168,7 +168,7 @@ public class InputReceiver : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 			NewWorkbookManager.Instance.CameraManager.CheckMinZoom(Input.mousePosition);
 			NewWorkbookManager.Instance.CameraManager.SwitchLoupeOnOff(true);
 			NewWorkbookManager.Instance.CameraManager.UpdateLoupe(Input.mousePosition);
-			AnalyticsManager.Instance.LongTapActivated();
+			// AnalyticsManager.Instance.LongTapActivated();
 		}
 	}
 
@@ -235,7 +235,7 @@ public class InputReceiver : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 						if (!this.m_currentZoomLogged)
 						{
 							this.m_currentZoomLogged = true;
-							AnalyticsManager.Instance.ZoomDone();
+							// AnalyticsManager.Instance.ZoomDone();
 						}
 						this.m_touchesDelta = num2;
 						NewWorkbookManager.Instance.CameraManager.Move((Vector2)Input.mousePosition - this.m_mousePrev);

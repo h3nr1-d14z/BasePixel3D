@@ -68,10 +68,10 @@ public class SpecBoostersModel
 
 	public void SpendLasso()
 	{
-		if (!IAPWrapper.Instance.NoAds)
-		{
+		// if (!IAPWrapper.Instance.NoAds)
+		// {
 			AppData.LassoCount--;
-		}
+		// }
 		if (AppData.LassoCount <= 0)
 		{
 			this.LassoMode = false;
@@ -81,10 +81,10 @@ public class SpecBoostersModel
 
 	public void SpendBomb()
 	{
-		if (!IAPWrapper.Instance.NoAds)
-		{
+		// if (!IAPWrapper.Instance.NoAds)
+		// {
 			AppData.BombCount--;
-		}
+		// }
 		if (AppData.BombCount <= 0)
 		{
 			this.BombMode = false;

@@ -68,8 +68,8 @@ public class NewLibraryWindow : BaseWindow
 	private void Awake()
 	{
 		NewLibraryWindow.instance = this;
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 		DataManager instance2 = DataManager.Instance;
 		instance2.OnInternetAppeared = (Action)Delegate.Combine(instance2.OnInternetAppeared, new Action(this.OnInternetAppearedHandler));
 	}
@@ -185,7 +185,7 @@ public class NewLibraryWindow : BaseWindow
 	{
 		DailyGame.ResetState(false);
 
-		AnalyticsManager.Instance.ImageSelected(imageInfo);
+		// AnalyticsManager.Instance.ImageSelected(imageInfo);
 		
 		this.DrawAction(imageInfo, imagePreview);
 	}
@@ -215,17 +215,18 @@ public class NewLibraryWindow : BaseWindow
 		if (instance != null)
 		{
 			DailyGame.ResetState(true);
-			AnalyticsManager.Instance.ImageSelected(imageInfo);
+			// AnalyticsManager.Instance.ImageSelected(imageInfo);
 			instance.DrawAction(imageInfo, null);
 		}
 	}
 	public void DrawAction(ImageInfo imageInfo, ImagePreview preview)
 	{
-		if (!InternetConnection.IsAvailable && !DataManager.Instance.CheckLocalAsset(imageInfo))
-		{
-			DialogToolWrapper.ShowNoInternetDialog();
-		}
-		else if (!this.m_lock)
+		// if (!InternetConnection.IsAvailable && !DataManager.Instance.CheckLocalAsset(imageInfo))
+		// {
+		// 	DialogToolWrapper.ShowNoInternetDialog();
+		// }
+		// else 
+		if (!this.m_lock)
 		{
 			this.m_lock = true;
 			string text = MainManager.Instance.SavedWorksList.LastSaveOfImageId(imageInfo.Id);
@@ -274,87 +275,87 @@ public class NewLibraryWindow : BaseWindow
 
 	public void NewImageButtonClick(ImageInfo imageInfo, ImageOpenType imageOpenType, ImagePreview imagePreview)
 	{
-		if ((imageInfo.CustomAccessStatus == AccessStatus.Free && imagePreview != null && !imagePreview.AdsAvailable) || IAPWrapper.Instance.Subscribed || AppData.UnlockedImages.Contains(imageInfo.Id))
-		{
-			base.StartCoroutine(this.NewImageButtonClickCoroutine(imageInfo, imageOpenType));
-		}
-		else
-		{
-			if (INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.None && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Old && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Revealed)
-			{
-				switch (INPluginWrapper.Instance.GetAbTestGroup())
-				{
-					case ABTestGroup.None:
-					case ABTestGroup.RewardedNo_ContentMedium_Old:
-					case ABTestGroup.RewardedNo_ContentMedium_Revealed:
-						{
-							NewInappsWindow newInappsWindow2 = WindowManager.Instance.OpenInappsWindow();
-							newInappsWindow2.Init("image", delegate
-							{
-								this.m_bigPreview.Close();
-							});
-							break;
-						}
-					case ABTestGroup.RewardedNo_ContentMedium:
-					case ABTestGroup.RewardedNo_ContentHard:
-						{
-							var trialInappsWindow2 = WindowManager.Instance.OpenInappsWindow();
-							trialInappsWindow2.Init("image", delegate
-							{
-								this.m_bigPreview.Close();
-							});//, false, false);
-							break;
-						}
-					default:
-						if ((imagePreview != null && imagePreview.AdsAvailable && !imagePreview.IsFreePremium))
-						{
-							AdsWrapper.Instance.ShowVideo("image", delegate (bool res)
-							{
-								if (res)
-								{
-									base.StartCoroutine(this.NewImageButtonClickCoroutine(imageInfo, imageOpenType));
-								}
-							});
-						}
-						else if (imagePreview != null || imageInfo.AccessStatus == AccessStatus.Premium) //if (AdsWrapper.Instance.IsVideoAvailable())
-						{
-							IapPopup abTestWindow = WindowManager.Instance.OpenAbTestWindow();
-							abTestWindow.Init(imageInfo, imagePreview);
-						}
-						else
-						{
-							base.StartCoroutine(this.NewImageButtonClickCoroutine(imageInfo, imageOpenType));
-						}
-						//else
-						//{
-						//    switch (INPluginWrapper.Instance.GetAbTestGroup())
-						//    {
-						//        case ABTestGroup.None:
-						//        case ABTestGroup.RewardedNo_ContentMedium_Old:
-						//        case ABTestGroup.RewardedNo_ContentMedium_Revealed:
-						//        {
-						//            NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
-						//            newInappsWindow.Init("image", null);
-						//            break;
-						//        }
-						//        default:
-						//        {
-						//            TrialInappsWindow trialInappsWindow = WindowManager.Instance.OpenTrialInappsWindow();
-						//            trialInappsWindow.Init("image", null, false, false);
-						//            break;
-						//        }
-						//    }
-						//}
-						this.m_bigPreview.Close();
-						break;
-				}
-			}
-			else
+		// if ((imageInfo.CustomAccessStatus == AccessStatus.Free && imagePreview != null && !imagePreview.AdsAvailable) || IAPWrapper.Instance.Subscribed || AppData.UnlockedImages.Contains(imageInfo.Id))
+		// {
+		// 	base.StartCoroutine(this.NewImageButtonClickCoroutine(imageInfo, imageOpenType));
+		// }
+		// else
+		// {
+		// 	if (INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.None && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Old && INPluginWrapper.Instance.GetAbTestGroup() != ABTestGroup.RewardedNo_ContentMedium_Revealed)
+		// 	{
+		// 		switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// 		{
+		// 			case ABTestGroup.None:
+		// 			case ABTestGroup.RewardedNo_ContentMedium_Old:
+		// 			case ABTestGroup.RewardedNo_ContentMedium_Revealed:
+		// 				{
+		// 					NewInappsWindow newInappsWindow2 = WindowManager.Instance.OpenInappsWindow();
+		// 					newInappsWindow2.Init("image", delegate
+		// 					{
+		// 						this.m_bigPreview.Close();
+		// 					});
+		// 					break;
+		// 				}
+		// 			case ABTestGroup.RewardedNo_ContentMedium:
+		// 			case ABTestGroup.RewardedNo_ContentHard:
+		// 				{
+		// 					var trialInappsWindow2 = WindowManager.Instance.OpenInappsWindow();
+		// 					trialInappsWindow2.Init("image", delegate
+		// 					{
+		// 						this.m_bigPreview.Close();
+		// 					});//, false, false);
+		// 					break;
+		// 				}
+		// 			default:
+		// 				if ((imagePreview != null && imagePreview.AdsAvailable && !imagePreview.IsFreePremium))
+		// 				{
+		// 					AdsWrapper.Instance.ShowVideo("image", delegate (bool res)
+		// 					{
+		// 						if (res)
+		// 						{
+		// 							base.StartCoroutine(this.NewImageButtonClickCoroutine(imageInfo, imageOpenType));
+		// 						}
+		// 					});
+		// 				}
+		// 				else if (imagePreview != null || imageInfo.AccessStatus == AccessStatus.Premium) //if (AdsWrapper.Instance.IsVideoAvailable())
+		// 				{
+		// 					IapPopup abTestWindow = WindowManager.Instance.OpenAbTestWindow();
+		// 					abTestWindow.Init(imageInfo, imagePreview);
+		// 				}
+		// 				else
+		// 				{
+		// 					base.StartCoroutine(this.NewImageButtonClickCoroutine(imageInfo, imageOpenType));
+		// 				}
+		// 				//else
+		// 				//{
+		// 				//    switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// 				//    {
+		// 				//        case ABTestGroup.None:
+		// 				//        case ABTestGroup.RewardedNo_ContentMedium_Old:
+		// 				//        case ABTestGroup.RewardedNo_ContentMedium_Revealed:
+		// 				//        {
+		// 				//            NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
+		// 				//            newInappsWindow.Init("image", null);
+		// 				//            break;
+		// 				//        }
+		// 				//        default:
+		// 				//        {
+		// 				//            TrialInappsWindow trialInappsWindow = WindowManager.Instance.OpenTrialInappsWindow();
+		// 				//            trialInappsWindow.Init("image", null, false, false);
+		// 				//            break;
+		// 				//        }
+		// 				//    }
+		// 				//}
+		// 				this.m_bigPreview.Close();
+		// 				break;
+		// 		}
+		// 	}
+		// 	else
 			{
 				base.StartCoroutine(this.NewImageButtonClickCoroutine(imageInfo, imageOpenType));
 			}
 			this.m_lock = false;
-		}
+		// }
 	}
 	public void LoadButtonClick(ImageInfo imageInfo)
 	{
@@ -456,8 +457,8 @@ public class NewLibraryWindow : BaseWindow
 
 	private void OnDestroy()
 	{
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 		DataManager instance2 = DataManager.Instance;
 		instance2.OnInternetAppeared = (Action)Delegate.Remove(instance2.OnInternetAppeared, new Action(this.OnInternetAppearedHandler));
 	}

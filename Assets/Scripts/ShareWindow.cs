@@ -74,8 +74,8 @@ public class ShareWindow : BaseWindow
 	{
 		this.m_image.material = new Material(Shader.Find("Custom/GreyTextureShader"));
 		this.m_filterImage.material = new Material(Shader.Find("Custom/TilingShader"));
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 		base.OnOpen = (Action)Delegate.Combine(base.OnOpen, new Action(this.OnOpenHandler));
 	}
 
@@ -207,22 +207,22 @@ public class ShareWindow : BaseWindow
 
 	public void DeleteWatermark()
 	{
-		AnalyticsManager.Instance.DeleteWatermarkAttempt();
-		switch (INPluginWrapper.Instance.GetAbTestGroup())
-		{
-			case ABTestGroup.RewardedYes_ContentMedium_New:
-			case ABTestGroup.RewardedYes_ContentHard:
-			case ABTestGroup.Rewarded_yes_content_medium_no1screen:
-			case ABTestGroup.Rewarded_yes_content_hard_no1screen:
-				{
-					NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
-					newInappsWindow.Init("watermark", null);
-					break;
-				}
-			default:
-				IAPWrapper.Instance.BuyProduct(SubscriptionType.remove_ads, "watermark", null);
-				break;
-		}
+		// AnalyticsManager.Instance.DeleteWatermarkAttempt();
+		// switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// {
+		// 	case ABTestGroup.RewardedYes_ContentMedium_New:
+		// 	case ABTestGroup.RewardedYes_ContentHard:
+		// 	case ABTestGroup.Rewarded_yes_content_medium_no1screen:
+		// 	case ABTestGroup.Rewarded_yes_content_hard_no1screen:
+		// 		{
+		// 			NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
+		// 			newInappsWindow.Init("watermark", null);
+		// 			break;
+		// 		}
+		// 	default:
+		// 		IAPWrapper.Instance.BuyProduct(SubscriptionType.remove_ads, "watermark", null);
+		// 		break;
+		// }
 	}
 
 	private void OnPurchaseHandler(bool res, SubscriptionType subscription)
@@ -255,7 +255,7 @@ public class ShareWindow : BaseWindow
 			this.ShowMessage((!res) ? "error" : "saved");
 			if (res)
 			{
-				AnalyticsManager.Instance.SaveSuccess();
+				// AnalyticsManager.Instance.SaveSuccess();
 				base.StartCoroutine(this.ShowRateUsIfNeedCoroutine(RateUsReason.SaveInGallery));
 			}
 		});
@@ -269,7 +269,7 @@ public class ShareWindow : BaseWindow
 		}
 		else
 		{
-			AnalyticsManager.Instance.ShareButtonClicked(); 
+			// AnalyticsManager.Instance.ShareButtonClicked(); 
 			string filePath = AppPathsConfig.SavedImagesPath + this.m_savedWorkData.Id + ".png";
 			MainManager.Instance.FreeImageSaver.GetFilteredImage(this.m_savedWorkData, delegate (byte[] bytes)
 			{
@@ -288,7 +288,7 @@ public class ShareWindow : BaseWindow
 		}
 		else
 		{
-			AnalyticsManager.Instance.ShareViaFbButtonClicked(); 
+			// AnalyticsManager.Instance.ShareViaFbButtonClicked(); 
 			string filePath = AppPathsConfig.SavedImagesPath + this.m_savedWorkData.Id + ".png";
 			MainManager.Instance.FreeImageSaver.GetFilteredImage(this.m_savedWorkData, delegate (byte[] bytes)
 			{
@@ -307,7 +307,7 @@ public class ShareWindow : BaseWindow
 		}
 		else
 		{
-			AnalyticsManager.Instance.ShareViaInstagramButtonClicked(); 
+			// AnalyticsManager.Instance.ShareViaInstagramButtonClicked(); 
 			string filePath = AppPathsConfig.SavedImagesPath + this.m_savedWorkData.Id + ".png";
 			UnityEngine.Debug.Log(filePath);
 			MainManager.Instance.FreeImageSaver.GetFilteredImage(this.m_savedWorkData, delegate (byte[] bytes)
@@ -350,14 +350,14 @@ public class ShareWindow : BaseWindow
 	public void CloseButtonClick()
 	{
 		WindowManager.Instance.CloseMe(this);
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 		AudioManager.Instance.PlayClick();
 	}
 
 	private void OnDestroy()
 	{
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 	} 
 
 	private IEnumerator ShowRateUsIfNeedCoroutine(RateUsReason reason)
@@ -374,7 +374,7 @@ public class ShareWindow : BaseWindow
 			this.m_waitTimeForRateUs = false;
 			if (RateUsWindow.NeedShow(reason))
 			{
-				DialogToolWrapper.ShowRateUsDialog(null);
+				// DialogToolWrapper.ShowRateUsDialog(null);
 			}
 		}
 	}

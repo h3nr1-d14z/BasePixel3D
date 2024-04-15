@@ -238,7 +238,7 @@ public class NewMyWorksWindow : BaseWindow
 	{
 		ISavedWorkData savedWorkData = MainManager.Instance.SavedWorksList.LoadById(saveId);
 		ImageInfo imageInfo = savedWorkData.ImageInfo;
-		AnalyticsManager.Instance.ImageSelected(imageInfo);
+		// AnalyticsManager.Instance.ImageSelected(imageInfo);
 		this.m_bigPreview.Init((RectTransform)preview.transform, preview.Texture, false, savedWorkData);
 	}
 
@@ -287,7 +287,9 @@ public class NewMyWorksWindow : BaseWindow
 		{
 			imageInfo = savedWorkData.ImageInfo;
 		}
-		if (imageInfo.CustomAccessStatus == AccessStatus.Free || IAPWrapper.Instance.Subscribed)
+		if (imageInfo.CustomAccessStatus == AccessStatus.Free 
+		    // || IAPWrapper.Instance.Subscribed
+		    )
 		{
 			this.m_lock = true;
 			ISavedWorkData savedWorkData2 = MainManager.Instance.SavedWorksList.LoadById(saveId);
@@ -304,18 +306,18 @@ public class NewMyWorksWindow : BaseWindow
 	public void DeleteButtonClick(string saveId)
 	{
 		this.m_bigPreview.Close();
-		AnalyticsManager.Instance.DeleteButtonClick();
-		DialogToolWrapper.ShowDeleteDialog(delegate (bool res)
-		{
-			if (res)
-			{
-				AnalyticsManager.Instance.DeleteSuccess();
+		// AnalyticsManager.Instance.DeleteButtonClick();
+		// DialogToolWrapper.ShowDeleteDialog(delegate (bool res)
+		// {
+			// if (res)
+			// {
+				// AnalyticsManager.Instance.DeleteSuccess();
 				MainManager.Instance.SavedWorksList.Delete(saveId);
 				this.m_currentGroupIndex = -1;
 				this.m_lock = false;
 				this.Reinit();
-			}
-		});
+			// }
+		// });
 	}
 
 	public void ShareButtonClick(string saveId)

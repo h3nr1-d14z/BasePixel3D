@@ -149,7 +149,7 @@ public class MainMenu : BaseWindow
 			case MainMenuPage.Library:
 				this.m_currentWindow = this.m_newLibraryWindow;
 				this.OnLibraryStartOpenHandler();
-				AnalyticsManager.Instance.LibraryOpened();
+				// AnalyticsManager.Instance.LibraryOpened();
 				break;
 			case MainMenuPage.MyWorks:
 				this.m_newLibraryWindow.FastClose();
@@ -157,7 +157,7 @@ public class MainMenu : BaseWindow
 				this.m_currentWindow = this.m_myWorksWindow;
 				this.m_myWorksWindow.Init();
 				this.OnMyWorksStartOpenHandler();
-				AnalyticsManager.Instance.MyWorksOpened();
+				// AnalyticsManager.Instance.MyWorksOpened();
 				break;
 			case MainMenuPage.Photos:
 				this.m_newLibraryWindow.FastClose();
@@ -165,7 +165,7 @@ public class MainMenu : BaseWindow
 				this.m_currentWindow = this.m_photosWindow;
 				this.m_photosWindow.Init();
 				this.OnCreationTabStartOpenHandler();
-				AnalyticsManager.Instance.PhotosOpened();
+				// AnalyticsManager.Instance.PhotosOpened();
 				break;
 		}
 	}
@@ -194,14 +194,14 @@ public class MainMenu : BaseWindow
 		{
 			this.m_myWorksWindow.Close();
 			this.m_newLibraryWindow.DefferedOpen(0.1f);
-			AnalyticsManager.Instance.LibraryOpened();
+			// AnalyticsManager.Instance.LibraryOpened();
 			return false;
 		}
 		if (this.m_photosWindow.isActiveAndEnabled)
 		{
 			this.m_photosWindow.Close();
 			this.m_newLibraryWindow.DefferedOpen(0.1f);
-			AnalyticsManager.Instance.PhotosOpened();
+			// AnalyticsManager.Instance.PhotosOpened();
 		}
 		SystemToolsWrapper.Minimize();
 		return false;
@@ -212,12 +212,12 @@ public class MainMenu : BaseWindow
 		if (this.m_currentWindow != this.m_newLibraryWindow && !this.m_buttonsBlocked)
 		{
 			this.m_buttonsBlocked = true;
-			AdsWrapper.Instance.ShowInter("tab_change");
+			// AdsWrapper.Instance.ShowInter("tab_change");
 			WindowManager.Instance.CloseMe(this.m_currentWindow, WindowOpenStyle.FromRight);
 			this.m_currentWindow = this.m_newLibraryWindow;
 			this.m_newLibraryWindow.DefferedOpen(0.1f);
 			this.SelectTab(this.m_libraryTab);
-			AnalyticsManager.Instance.LibraryOpened();
+			// AnalyticsManager.Instance.LibraryOpened();
 			AudioManager.Instance.PlayClick();
 		}
 	}
@@ -227,7 +227,7 @@ public class MainMenu : BaseWindow
 		if (this.m_currentWindow != this.m_myWorksWindow && !this.m_buttonsBlocked)
 		{
 			this.m_buttonsBlocked = true;
-			AdsWrapper.Instance.ShowInter("tab_change");
+			// AdsWrapper.Instance.ShowInter("tab_change");
 			this.m_myWorksWindow.Init();
 			if (this.m_currentWindow == this.m_newLibraryWindow)
 			{
@@ -241,7 +241,7 @@ public class MainMenu : BaseWindow
 			}
 			this.m_currentWindow = this.m_myWorksWindow;
 			this.SelectTab(this.m_myWorksTab);
-			AnalyticsManager.Instance.MyWorksOpened();
+			// AnalyticsManager.Instance.MyWorksOpened();
 			AudioManager.Instance.PlayClick();
 		}
 	}
@@ -251,7 +251,7 @@ public class MainMenu : BaseWindow
 		if (this.m_currentWindow != this.m_photosWindow && !this.m_buttonsBlocked)
 		{
 			this.m_buttonsBlocked = true;
-			AdsWrapper.Instance.ShowInter("tab_change");
+			// AdsWrapper.Instance.ShowInter("tab_change");
 			this.m_photosWindow.Init();
 			if (this.m_currentWindow == this.m_newLibraryWindow || this.m_currentWindow == this.m_myWorksWindow)
 			{
@@ -265,7 +265,7 @@ public class MainMenu : BaseWindow
 			}
 			this.m_currentWindow = this.m_photosWindow;
 			this.SelectTab(this.m_photosTab);
-			AnalyticsManager.Instance.PhotosOpened();
+			// AnalyticsManager.Instance.PhotosOpened();
 			AudioManager.Instance.PlayClick();
 		}
 	}
@@ -277,7 +277,7 @@ public class MainMenu : BaseWindow
 			this.m_buttonsBlocked = true;
 			WindowManager.Instance.CloseMe(this.m_currentWindow, WindowOpenStyle.FromLeft);
 			this.m_currentWindow = this.m_settingsWindow;
-			AnalyticsManager.Instance.MyWorksOpened();
+			// AnalyticsManager.Instance.MyWorksOpened();
 			AudioManager.Instance.PlayClick();
 			this.m_settingsWindow.DefferedOpen(0.1f);
 			this.SelectTab(this.m_settingsTab);

@@ -98,12 +98,12 @@ public class NewWorkbook : BaseWindow
 		Vector2 cameraPos = NewWorkbookManager.Instance.CameraManager.CameraPos;
 		filterWindow.Init(NewWorkbookManager.Instance.SaveWork(true), maxZoom, default(Rect));
 		AudioManager.Instance.PlayClick();
-		AdsWrapper.Instance.ShowInterOrRate("end_level");
+		// AdsWrapper.Instance.ShowInterOrRate("end_level");
 	}
 
 	public void BackButtonClick()
 	{
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 		NewWorkbookManager.Instance.Exit();
 		AudioManager.Instance.PlayClick();
 	}
@@ -111,9 +111,9 @@ public class NewWorkbook : BaseWindow
 	public void CloseCompletedPlateButtonClick()
 	{
 		this.m_completedPlane.SetActive(false);
-		AdsWrapper.Instance.ShowInterOrRate("end_level");
+		// AdsWrapper.Instance.ShowInterOrRate("end_level");
 		AudioManager.Instance.PlayClick();
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 	}
 
 	public override bool Close()

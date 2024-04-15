@@ -4,14 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Purchasing;
+// using UnityEngine.Purchasing;
 using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
-	public string oneSignalAppId = "fbe964d0-9eee-4cf6-845d-174245eec26a";
-	public string oneSignaliOSAppId = "d88013d2-c394-40ee-8036-d55175dc3f4b";
-	public string googleProjectId = "718810063125";
+	// public string oneSignalAppId = "fbe964d0-9eee-4cf6-845d-174245eec26a";
+	// public string oneSignaliOSAppId = "d88013d2-c394-40ee-8036-d55175dc3f4b";
+	// public string googleProjectId = "718810063125";
 
 	private bool first;
 
@@ -112,32 +112,32 @@ public class MainManager : MonoBehaviour
 		GC.Collect();
 	}
 
-	public void OnOpenWithUrl(string s)
-	{
-		Dictionary<string, string> dict = DeepLinkWrapper.Parse(s);
-		if (dict != null && dict.ContainsKey("host") && dict["host"] == "main")
-		{
-			if ((UnityEngine.Object)IAPWrapper.Instance != (UnityEngine.Object)null && dict.ContainsKey("inapp"))
-			{
-				string inapp = dict["inapp"];
-				UnityEngine.Debug.Log("try buy");
-				IAPWrapper.Instance.BuyProductStoreSpecific(inapp, "start", delegate (bool result, SubscriptionType type, PurchaseFailureReason reason)
-				{
-					UnityEngine.Debug.Log(result + ": " + type);
-					if (result && dict.ContainsKey("adid"))
-					{
-						string text = dict["adid"];
-						UnityEngine.Debug.Log(text + " ... " + inapp);
-						AnalyticsManager.Instance.PurchaseFromAd(inapp, text);
-					}
-				});
-			}
-			if (!dict.ContainsKey("from_image_local"))
-			{
-				return;
-			}
-		}
-	}
+	// public void OnOpenWithUrl(string s)
+	// {
+	// 	Dictionary<string, string> dict = DeepLinkWrapper.Parse(s);
+	// 	if (dict != null && dict.ContainsKey("host") && dict["host"] == "main")
+	// 	{
+	// 		if ((UnityEngine.Object)IAPWrapper.Instance != (UnityEngine.Object)null && dict.ContainsKey("inapp"))
+	// 		{
+	// 			string inapp = dict["inapp"];
+	// 			UnityEngine.Debug.Log("try buy");
+	// 			IAPWrapper.Instance.BuyProductStoreSpecific(inapp, "start", delegate (bool result, SubscriptionType type, PurchaseFailureReason reason)
+	// 			{
+	// 				UnityEngine.Debug.Log(result + ": " + type);
+	// 				if (result && dict.ContainsKey("adid"))
+	// 				{
+	// 					string text = dict["adid"];
+	// 					UnityEngine.Debug.Log(text + " ... " + inapp);
+	// 					AnalyticsManager.Instance.PurchaseFromAd(inapp, text);
+	// 				}
+	// 			});
+	// 		}
+	// 		if (!dict.ContainsKey("from_image_local"))
+	// 		{
+	// 			return;
+	// 		}
+	// 	}
+	// }
 
 	private void Update()
 	{
@@ -145,7 +145,7 @@ public class MainManager : MonoBehaviour
 		int num = 9768;
 		if (this.m_secondsInGame >= (float)num && (DateTime.UtcNow - AppData.FirstLaunch).TotalDays <= 7.0 && !AppData.WeekSecondsTracked)
 		{
-			AnalyticsManager.Instance.TrackFirstWeekSecondsLimit();
+			// AnalyticsManager.Instance.TrackFirstWeekSecondsLimit();
 			AppData.WeekSecondsTracked = true;
 		}
 	}
@@ -206,7 +206,7 @@ public class MainManager : MonoBehaviour
 #if FACEBOOK
         FacebookWrapper.Instance.Init(null);
 #endif
-		LocalNotificationWrapper.Instance.Init();
+		// LocalNotificationWrapper.Instance.Init();
 		SystemToolsWrapper.GetUid();
 		yield return null;
 
@@ -214,24 +214,24 @@ public class MainManager : MonoBehaviour
 		this.m_savedWorksList = new SavedWorksList();
 		this.m_savedWorksList.Init();
 		LocalizationManager.Instance.Init(this.localization.text);
-		AdsWrapper.Instance.Init();
+		// AdsWrapper.Instance.Init();
 		float timer = 3f;
-
-		while (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.Undefined)
-		{
-			timer -= Time.deltaTime;
-			if (timer < 0f)
-			{
-				UnityEngine.Debug.Log("NoResponse. SetDefaultGroup");
-				INPluginWrapper.Instance.SetDefaultAbTestGroup(ABTestGroup.None);
-			}
-			yield return null;
-		}
-		UnityEngine.Debug.Log("ABTestGroup: " + INPluginWrapper.Instance.GetAbTestGroup());
-		if (INPluginWrapper.Instance.GetBannerStrategy() == BannerStrategy.Undefined)
-		{
-			INPluginWrapper.Instance.SetDefaultBannerStrategy();
-		}
+		//
+		// while (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.Undefined)
+		// {
+		// 	timer -= Time.deltaTime;
+		// 	if (timer < 0f)
+		// 	{
+		// 		UnityEngine.Debug.Log("NoResponse. SetDefaultGroup");
+		// 		INPluginWrapper.Instance.SetDefaultAbTestGroup(ABTestGroup.None);
+		// 	}
+		// 	yield return null;
+		// }
+		// UnityEngine.Debug.Log("ABTestGroup: " + INPluginWrapper.Instance.GetAbTestGroup());
+		// if (INPluginWrapper.Instance.GetBannerStrategy() == BannerStrategy.Undefined)
+		// {
+		// 	INPluginWrapper.Instance.SetDefaultBannerStrategy();
+		// }
 		AppData.CheckSessionEvents();
 		this.first = true;
 		this.StartLibrary(MainMenuPage.Library);
@@ -253,43 +253,43 @@ public class MainManager : MonoBehaviour
 
 		var mainMenu = WindowManager.Instance.OpenMainMenu();
 		mainMenu.Init(page);
-		bool needTrialWindow = false; 
-		if (this.first && !IAPWrapper.Instance.NoAds)
-		{
-			needTrialWindow = (AppData.SessionId == 1);
-			if (!needTrialWindow && AppData.UpdateToNew && !AppData.SubCampaignWasShown)
-			{ 
-				needTrialWindow = true; 
-			}
-		}
-		if (needTrialWindow)
-		{
-			this.first = false; 
-			if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedYes_ContentHard 
-				|| INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedYes_ContentMedium_New)
-			{
-				var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
-				trialInappsWindow.Init("first_launch", null);
-			}
-			while (WindowManager.Instance.OpenedWindowsCount > 1)
-			{
-				yield return null;
-			}
-			yield return new WaitForSeconds(1f);
-
-            try
-            {
-#if UNITY_ANDROID
-			OneSignalWrapper.Init(oneSignalAppId, googleProjectId);
-#else
-                OneSignalWrapper.Init(oneSignaliOSAppId, googleProjectId);
-#endif
-            }
-            catch(Exception ex)
-            {
-                Debug.LogError(ex);
-            }
-		}
+// 		bool needTrialWindow = false; 
+// 		if (this.first && !IAPWrapper.Instance.NoAds)
+// 		{
+// 			needTrialWindow = (AppData.SessionId == 1);
+// 			if (!needTrialWindow && AppData.UpdateToNew && !AppData.SubCampaignWasShown)
+// 			{ 
+// 				needTrialWindow = true; 
+// 			}
+// 		}
+// 		if (needTrialWindow)
+// 		{
+// 			this.first = false; 
+// 			if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedYes_ContentHard 
+// 				|| INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedYes_ContentMedium_New)
+// 			{
+// 				var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
+// 				trialInappsWindow.Init("first_launch", null);
+// 			}
+// 			while (WindowManager.Instance.OpenedWindowsCount > 1)
+// 			{
+// 				yield return null;
+// 			}
+// 			yield return new WaitForSeconds(1f);
+//
+//             try
+//             {
+// #if UNITY_ANDROID
+// 			OneSignalWrapper.Init(oneSignalAppId, googleProjectId);
+// #else
+//                 OneSignalWrapper.Init(oneSignaliOSAppId, googleProjectId);
+// #endif
+//             }
+//             catch(Exception ex)
+//             {
+//                 Debug.LogError(ex);
+//             }
+// 		}
 	}
 
 	private IEnumerator StartWorkbookCoroutine(ImageInfo imageInfo, ImageOpenType imageOpenType, ISavedWorkData savedWorkData = null, Action badHandler = null)
@@ -304,7 +304,7 @@ public class MainManager : MonoBehaviour
 				}
 				else
 				{
-					DialogToolWrapper.ShowNoInternetDialog();
+					// DialogToolWrapper.ShowNoInternetDialog();
 					badHandler.SafeInvoke();
 				}
 			}); 

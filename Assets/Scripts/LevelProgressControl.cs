@@ -1,5 +1,5 @@
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
+// using GooglePlayGames;
+// using GooglePlayGames.BasicApi;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -131,19 +131,19 @@ public class LevelProgressControl : MonoBehaviour
             this.LoadProgressData();
 
 
-			#if (UNITY_ANDROID || (UNITY_IPHONE && !NO_GPGS))
-			PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-				// enables saving game progress.
-				//.EnableSavedGames()
-
-				// require access to a player's Google+ social graph (usually not needed)
-				//.RequireGooglePlus()
-				.Build();
-			PlayGamesPlatform.InitializeInstance(config);
-
-			PlayGamesPlatform.DebugLogEnabled = true;
-			PlayGamesPlatform.Activate();
-			#endif
+			// #if (UNITY_ANDROID || (UNITY_IPHONE && !NO_GPGS))
+			// PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+			// 	// enables saving game progress.
+			// 	//.EnableSavedGames()
+			//
+			// 	// require access to a player's Google+ social graph (usually not needed)
+			// 	//.RequireGooglePlus()
+			// 	.Build();
+			// PlayGamesPlatform.InitializeInstance(config);
+			//
+			// PlayGamesPlatform.DebugLogEnabled = true;
+			// PlayGamesPlatform.Activate();
+			// #endif
 			//this.androidSdkLevel = this.GetAndroidSDKLevel();
 		}
         else if ((UnityEngine.Object)LevelProgressControl.control != (UnityEngine.Object)this)

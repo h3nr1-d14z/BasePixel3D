@@ -233,13 +233,13 @@ public class GetNameScript : MonoBehaviour
             {
                 if (!LevelProgressControl.control.iapDisableAds)
                 {
-                    if (AdsWrapper.Instance.IsVideoAvailable())
-                    {
-						AdsWrapper.Instance.ShowInter(string.Empty);
-                        num2 = 287462819;
-                        PlayerPrefs.SetInt("PuzzleStateId", num2);
-                        PlayerPrefs.Save();
-                    }
+      //               if (AdsWrapper.Instance.IsVideoAvailable())
+      //               {
+						// AdsWrapper.Instance.ShowInter(string.Empty);
+      //                   num2 = 287462819;
+      //                   PlayerPrefs.SetInt("PuzzleStateId", num2);
+      //                   PlayerPrefs.Save();
+      //               }
                 }
                 else
                 {

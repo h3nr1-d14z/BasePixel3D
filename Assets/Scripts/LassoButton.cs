@@ -29,14 +29,14 @@ public class LassoButton : MonoBehaviour
 
 	private void Start()
 	{
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 		SpecBoostersModel specBoostersModel = WorkbookModel.Instance.SpecBoostersModel;
 		specBoostersModel.OnLassoModeChanged = (Action<SpecBoostersModel>)Delegate.Combine(specBoostersModel.OnLassoModeChanged, new Action<SpecBoostersModel>(this.OnLassoModeChangedHandler));
 		SpecBoostersModel specBoostersModel2 = WorkbookModel.Instance.SpecBoostersModel;
 		specBoostersModel2.OnStateChanged = (Action<SpecBoostersModel>)Delegate.Combine(specBoostersModel2.OnStateChanged, new Action<SpecBoostersModel>(this.OnLassoCountChangedHandler));
-		AdsWrapper instance2 = AdsWrapper.Instance;
-		instance2.OnVideoAvailabilityChanged = (Action)Delegate.Combine(instance2.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
+		// AdsWrapper instance2 = AdsWrapper.Instance;
+		// instance2.OnVideoAvailabilityChanged = (Action)Delegate.Combine(instance2.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
 		this.OnLassoModeChangedHandler(WorkbookModel.Instance.SpecBoostersModel);
 		this.OnLassoCountChangedHandler(WorkbookModel.Instance.SpecBoostersModel);
 		this.OnVideoAvailabilityChangedHandler();
@@ -47,23 +47,23 @@ public class LassoButton : MonoBehaviour
 	{
 		if (this.m_needUpdatePlusState)
 		{
-			if (IAPWrapper.Instance.Subscribed || IAPWrapper.Instance.NoAds)
-			{
-				this.m_plus.SetActive(false);
-			}
-			else
-			{
-				this.m_needUpdatePlusState = false;
-				ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
-				if (abTestGroup == ABTestGroup.None || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Old || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Revealed || abTestGroup == ABTestGroup.RewardedNo_ContentEasy)
-				{
-					this.m_plus.SetActive(AdsWrapper.Instance.IsVideoAvailable());
-				}
-				else
-				{
+			// if (IAPWrapper.Instance.Subscribed || IAPWrapper.Instance.NoAds)
+			// {
+			// 	this.m_plus.SetActive(false);
+			// }
+			// else
+			// {
+			// 	this.m_needUpdatePlusState = false;
+			// 	ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
+			// 	if (abTestGroup == ABTestGroup.None || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Old || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Revealed || abTestGroup == ABTestGroup.RewardedNo_ContentEasy)
+			// 	{
+			// 		this.m_plus.SetActive(AdsWrapper.Instance.IsVideoAvailable());
+			// 	}
+			// 	else
+			// 	{
 					this.m_plus.SetActive(true);
-				}
-			}
+				// }
+			// }
 			this.UpdateAdTextState();
 		}
 	}
@@ -75,11 +75,11 @@ public class LassoButton : MonoBehaviour
 
 	private void OnLassoCountChangedHandler(SpecBoostersModel model)
 	{
-		if (IAPWrapper.Instance.NoAds)
-		{
-			this.m_lassosCountField.gameObject.SetActive(false);
-		}
-		else
+		// if (IAPWrapper.Instance.NoAds)
+		// {
+		// 	this.m_lassosCountField.gameObject.SetActive(false);
+		// }
+		// else
 		{
 			this.m_lassosCountField.text = model.LassoCount.ToString();
 			this.m_lassosCountFieldCopy.text = model.LassoCount.ToString();
@@ -89,30 +89,30 @@ public class LassoButton : MonoBehaviour
 
 	private void OnVideoAvailabilityChangedHandler()
 	{
-		if (IAPWrapper.Instance.NoAds)
-		{
+		// if (IAPWrapper.Instance.NoAds)
+		// {
 			this.m_plus.gameObject.SetActive(false);
-		}
-		else
-		{
-			this.m_needUpdatePlusState = true;
-		}
+		// }
+		// else
+		// {
+		// 	this.m_needUpdatePlusState = true;
+		// }
 	}
 
 	private void UpdateAdTextState()
 	{
-		switch (INPluginWrapper.Instance.GetAbTestGroup())
-		{
-			case ABTestGroup.None:
-			case ABTestGroup.RewardedNo_ContentEasy:
-			case ABTestGroup.RewardedNo_ContentMedium_Old:
-			case ABTestGroup.RewardedNo_ContentMedium_Revealed:
-				this.m_adText.SetActive(AdsWrapper.Instance.IsVideoAvailable());
-				break;
-			default:
+		// switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// {
+		// 	case ABTestGroup.None:
+		// 	case ABTestGroup.RewardedNo_ContentEasy:
+		// 	case ABTestGroup.RewardedNo_ContentMedium_Old:
+		// 	case ABTestGroup.RewardedNo_ContentMedium_Revealed:
+		// 		this.m_adText.SetActive(AdsWrapper.Instance.IsVideoAvailable());
+		// 		break;
+		// 	default:
 				this.m_adText.SetActive(false);
-				break;
-		}
+		// 		break;
+		// }
 	}
 
 	private void OnPurchaseHandler(bool res, SubscriptionType subscrType)
@@ -123,13 +123,13 @@ public class LassoButton : MonoBehaviour
 
 	public void Click()
 	{
-		if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
-		{
-			while (WorkbookModel.Instance.SpecBoostersModel.LassoCount < 5)
-			{
-				WorkbookModel.Instance.SpecBoostersModel.AddLasso();
-			}
-		}
+		// if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
+		// {
+		// 	while (WorkbookModel.Instance.SpecBoostersModel.LassoCount < 5)
+		// 	{
+		// 		WorkbookModel.Instance.SpecBoostersModel.AddLasso();
+		// 	}
+		// }
 		if (WorkbookModel.Instance.SpecBoostersModel.LassoCount <= 0)
 		{
 			this.PlusClick();
@@ -137,59 +137,59 @@ public class LassoButton : MonoBehaviour
 		else
 		{
 			WorkbookModel.Instance.SpecBoostersModel.ChangeLassoMode(false);
-			if (WorkbookModel.Instance.SpecBoostersModel.LassoMode)
-			{
-				AnalyticsManager.Instance.LassoClicked(WorkbookModel.Instance.SpecBoostersModel.LassoCount);
-			}
+			// if (WorkbookModel.Instance.SpecBoostersModel.LassoMode)
+			// {
+				// AnalyticsManager.Instance.LassoClicked(WorkbookModel.Instance.SpecBoostersModel.LassoCount);
+			// }
 		}
 	}
 
 	public void PlusClick()
 	{
-		AnalyticsManager.Instance.LassoAddClick(WorkbookModel.Instance.SpecBoostersModel.LassoCount);
-		if (!IAPWrapper.Instance.NoAds && !IAPWrapper.Instance.Subscribed)
-		{
-			switch (INPluginWrapper.Instance.GetAbTestGroup())
-			{
-				case ABTestGroup.None:
-				case ABTestGroup.RewardedNo_ContentEasy:
-				case ABTestGroup.RewardedNo_ContentMedium_Old:
-				case ABTestGroup.RewardedNo_ContentMedium_Revealed:
-					if (AdsWrapper.Instance.IsVideoAvailable())
-					{
-						AdsWrapper.Instance.ShowVideo("wand", delegate (bool res)
-						{
-							if (res)
-							{
-								WorkbookModel.Instance.SpecBoostersModel.AddLasso();
-								WorkbookModel.Instance.SpecBoostersModel.ChangeLassoMode(true);
-							}
-						});
-					}
-					break;
-				default:
-					if (AdsWrapper.Instance.IsVideoAvailable())
-					{
-						IapPopup abWindow = WindowManager.Instance.OpenAbTestWindow();
-						abWindow.Init(delegate (bool res)
-						{
-							if (res)
-							{
-								WorkbookModel.Instance.SpecBoostersModel.AddLasso();
-								WorkbookModel.Instance.SpecBoostersModel.ChangeLassoMode(true);
-								WindowManager.Instance.CloseMe(abWindow);
-							}
-						}, ABTestGroup.RewardedYes_ContentHard, AbTestWindowMode.Lasso);
-					}
-					else
-					{
-						var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
-						trialInappsWindow.Init("wand", null);//, false, false);
-					}
-					break;
-			}
-		}
-		else
+		// AnalyticsManager.Instance.LassoAddClick(WorkbookModel.Instance.SpecBoostersModel.LassoCount);
+		// if (!IAPWrapper.Instance.NoAds && !IAPWrapper.Instance.Subscribed)
+		// {
+		// 	switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// 	{
+		// 		case ABTestGroup.None:
+		// 		case ABTestGroup.RewardedNo_ContentEasy:
+		// 		case ABTestGroup.RewardedNo_ContentMedium_Old:
+		// 		case ABTestGroup.RewardedNo_ContentMedium_Revealed:
+		// 			if (AdsWrapper.Instance.IsVideoAvailable())
+		// 			{
+		// 				AdsWrapper.Instance.ShowVideo("wand", delegate (bool res)
+		// 				{
+		// 					if (res)
+		// 					{
+		// 						WorkbookModel.Instance.SpecBoostersModel.AddLasso();
+		// 						WorkbookModel.Instance.SpecBoostersModel.ChangeLassoMode(true);
+		// 					}
+		// 				});
+		// 			}
+		// 			break;
+		// 		default:
+		// 			if (AdsWrapper.Instance.IsVideoAvailable())
+		// 			{
+		// 				IapPopup abWindow = WindowManager.Instance.OpenAbTestWindow();
+		// 				abWindow.Init(delegate (bool res)
+		// 				{
+		// 					if (res)
+		// 					{
+		// 						WorkbookModel.Instance.SpecBoostersModel.AddLasso();
+		// 						WorkbookModel.Instance.SpecBoostersModel.ChangeLassoMode(true);
+		// 						WindowManager.Instance.CloseMe(abWindow);
+		// 					}
+		// 				}, ABTestGroup.RewardedYes_ContentHard, AbTestWindowMode.Lasso);
+		// 			}
+		// 			else
+		// 			{
+		// 				var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
+		// 				trialInappsWindow.Init("wand", null);//, false, false);
+		// 			}
+		// 			break;
+		// 	}
+		// }
+		// else
 		{
 			WorkbookModel.Instance.SpecBoostersModel.AddLasso();
 			WorkbookModel.Instance.SpecBoostersModel.ChangeLassoMode(true);
@@ -207,10 +207,10 @@ public class LassoButton : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		AdsWrapper instance = AdsWrapper.Instance;
-		instance.OnVideoAvailabilityChanged = (Action)Delegate.Remove(instance.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
-		IAPWrapper instance2 = IAPWrapper.Instance;
-		instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// AdsWrapper instance = AdsWrapper.Instance;
+		// instance.OnVideoAvailabilityChanged = (Action)Delegate.Remove(instance.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
+		// IAPWrapper instance2 = IAPWrapper.Instance;
+		// instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 	}
 }
 

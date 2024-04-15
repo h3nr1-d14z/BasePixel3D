@@ -82,10 +82,10 @@ public class PhotoPreview : MonoBehaviour
 	{
 		DebugController instance = DebugController.Instance;
 		this.m_filterImage.material = new Material(Shader.Find("Custom/TilingShader"));
-		IAPWrapper instance2 = IAPWrapper.Instance;
-		instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
-		AdsWrapper instance3 = AdsWrapper.Instance;
-		instance3.OnVideoAvailabilityChanged = (Action)Delegate.Combine(instance3.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
+		// IAPWrapper instance2 = IAPWrapper.Instance;
+		// instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// AdsWrapper instance3 = AdsWrapper.Instance;
+		// instance3.OnVideoAvailabilityChanged = (Action)Delegate.Combine(instance3.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
 	}
 
 	public void Init(PhotoInfo photoInfo)
@@ -222,30 +222,30 @@ public class PhotoPreview : MonoBehaviour
 	{
 		if (this.m_plus.activeSelf)
 		{
-			if (!IAPWrapper.Instance.NoAds && AppData.FreePhotos == 0)
-			{
-				if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentEasy)
-				{
-					((Component)this.m_plus.transform.Find("plus")).GetComponent<Image>().sprite = ((!AdsWrapper.Instance.IsVideoAvailable()) ? this.m_disabledPlusSprite : this.m_enabledPlusSprite);
-					this.m_adIcon.SetActive(false);
-					this.m_premiumIcon.SetActive(false);
-				}
-			}
-			else
-			{
-				((Component)this.m_plus.transform.Find("plus")).GetComponent<Image>().sprite = this.m_enabledPlusSprite;
-				this.m_adIcon.SetActive(false);
-			}
+			// if (!IAPWrapper.Instance.NoAds && AppData.FreePhotos == 0)
+			// {
+				// if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentEasy)
+				// {
+					// ((Component)this.m_plus.transform.Find("plus")).GetComponent<Image>().sprite = ((!AdsWrapper.Instance.IsVideoAvailable()) ? this.m_disabledPlusSprite : this.m_enabledPlusSprite);
+					// this.m_adIcon.SetActive(false);
+					// this.m_premiumIcon.SetActive(false);
+				// }
+			// }
+			// else
+			// {
+			// 	((Component)this.m_plus.transform.Find("plus")).GetComponent<Image>().sprite = this.m_enabledPlusSprite;
+			// 	this.m_adIcon.SetActive(false);
+			// }
 		}
 	}
 
 	private void OnDestroy()
 	{
 		DebugController instance = DebugController.Instance;
-		IAPWrapper instance2 = IAPWrapper.Instance;
-		instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
-		AdsWrapper instance3 = AdsWrapper.Instance;
-		instance3.OnVideoAvailabilityChanged = (Action)Delegate.Remove(instance3.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
+		// IAPWrapper instance2 = IAPWrapper.Instance;
+		// instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// AdsWrapper instance3 = AdsWrapper.Instance;
+		// instance3.OnVideoAvailabilityChanged = (Action)Delegate.Remove(instance3.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
 	}
 }
 

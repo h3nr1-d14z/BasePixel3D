@@ -639,14 +639,14 @@ public static class AppData
 				TimeSpan t = today - installDate;
 				if (t == new TimeSpan(1, 0, 0, 0))
 				{
-					AnalyticsManager.Instance.LaunchNextDay();
-					AnalyticsManager.Instance.LaunchNext2Days();
+					// AnalyticsManager.Instance.LaunchNextDay();
+					// AnalyticsManager.Instance.LaunchNext2Days();
 					AppData.LaunchNextDay = true;
 					AppData.LaunchNext2Days = true;
 				}
 				else if (t == new TimeSpan(2, 0, 0, 0))
 				{
-					AnalyticsManager.Instance.LaunchNext2Days();
+					// AnalyticsManager.Instance.LaunchNext2Days();
 					AppData.LaunchNextDay = true;
 					AppData.LaunchNext2Days = true;
 				}
@@ -664,11 +664,11 @@ public static class AppData
 		{
 			return;
 		}
-		if (INPluginWrapper.Instance.GetAbTestGroup() != 0 && INPluginWrapper.Instance.GetBannerStrategy() != BannerStrategy.Undefined)
-		{
-			AnalyticsManager.Instance.TrackFirstSessionOfTheDay();
-			AppData.LastDayTracked = DateTime.Today;
-		}
+		// if (INPluginWrapper.Instance.GetAbTestGroup() != 0 && INPluginWrapper.Instance.GetBannerStrategy() != BannerStrategy.Undefined)
+		// {
+		// 	AnalyticsManager.Instance.TrackFirstSessionOfTheDay();
+		// 	AppData.LastDayTracked = DateTime.Today;
+		// }
 	}
 
 	public static void AddNewRateUsView()

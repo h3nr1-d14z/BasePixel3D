@@ -29,14 +29,14 @@ public class BombButton : MonoBehaviour
 
 	private void Start()
 	{
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 		SpecBoostersModel specBoostersModel = WorkbookModel.Instance.SpecBoostersModel;
 		specBoostersModel.OnBombModeChanged = (Action<SpecBoostersModel>)Delegate.Combine(specBoostersModel.OnBombModeChanged, new Action<SpecBoostersModel>(this.OnBombModeChangedHandler));
 		SpecBoostersModel specBoostersModel2 = WorkbookModel.Instance.SpecBoostersModel;
 		specBoostersModel2.OnStateChanged = (Action<SpecBoostersModel>)Delegate.Combine(specBoostersModel2.OnStateChanged, new Action<SpecBoostersModel>(this.OnBombCountChangedHandler));
-		AdsWrapper instance2 = AdsWrapper.Instance;
-		instance2.OnVideoAvailabilityChanged = (Action)Delegate.Combine(instance2.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
+		// AdsWrapper instance2 = AdsWrapper.Instance;
+		// instance2.OnVideoAvailabilityChanged = (Action)Delegate.Combine(instance2.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
 		this.OnBombModeChangedHandler(WorkbookModel.Instance.SpecBoostersModel);
 		this.OnBombCountChangedHandler(WorkbookModel.Instance.SpecBoostersModel);
 		this.OnVideoAvailabilityChangedHandler();
@@ -47,23 +47,23 @@ public class BombButton : MonoBehaviour
 	{
 		if (this.m_needUpdatePlusState)
 		{
-			if (IAPWrapper.Instance.Subscribed || IAPWrapper.Instance.NoAds)
-			{
-				this.m_plus.SetActive(false);
-			}
-			else
-			{
-				this.m_needUpdatePlusState = false;
-				ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
-				if (abTestGroup == ABTestGroup.None || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Old || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Revealed || abTestGroup == ABTestGroup.RewardedNo_ContentEasy)
-				{
-					this.m_plus.SetActive(AdsWrapper.Instance.IsVideoAvailable());
-				}
-				else
-				{
+			// if (IAPWrapper.Instance.Subscribed || IAPWrapper.Instance.NoAds)
+			// {
+				// this.m_plus.SetActive(false);
+			// }
+			// else
+			// {
+			// 	this.m_needUpdatePlusState = false;
+			// 	ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
+			// 	if (abTestGroup == ABTestGroup.None || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Old || abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Revealed || abTestGroup == ABTestGroup.RewardedNo_ContentEasy)
+			// 	{
+			// 		this.m_plus.SetActive(AdsWrapper.Instance.IsVideoAvailable());
+			// 	}
+			// 	else
+			// 	{
 					this.m_plus.SetActive(true);
-				}
-			}
+			// 	}
+			// }
 			this.UpdateAdTextState();
 		}
 	}
@@ -75,15 +75,15 @@ public class BombButton : MonoBehaviour
 
 	private void OnBombCountChangedHandler(SpecBoostersModel model)
 	{
-		if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
-		{
-			this.m_bombsCountField.gameObject.SetActive(false);
-		}
-		else if (IAPWrapper.Instance.NoAds)
-		{
-			this.m_bombsCountField.gameObject.SetActive(false);
-		}
-		else
+		// if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
+		// {
+		// 	this.m_bombsCountField.gameObject.SetActive(false);
+		// }
+		// else if (IAPWrapper.Instance.NoAds)
+		// {
+		// 	this.m_bombsCountField.gameObject.SetActive(false);
+		// }
+		// else
 		{
 			this.m_bombsCountField.text = model.BombCount.ToString();
 			this.m_bombsCountFieldCopy.text = model.BombCount.ToString();
@@ -93,30 +93,30 @@ public class BombButton : MonoBehaviour
 
 	private void OnVideoAvailabilityChangedHandler()
 	{
-		if (IAPWrapper.Instance.NoAds)
-		{
+		// if (IAPWrapper.Instance.NoAds)
+		// {
 			this.m_plus.gameObject.SetActive(false);
-		}
-		else
-		{
-			this.m_needUpdatePlusState = true;
-		}
+		// }
+		// else
+		// {
+		// 	this.m_needUpdatePlusState = true;
+		// }
 	}
 
 	private void UpdateAdTextState()
 	{
-		switch (INPluginWrapper.Instance.GetAbTestGroup())
-		{
-			case ABTestGroup.None:
-			case ABTestGroup.RewardedNo_ContentEasy:
-			case ABTestGroup.RewardedNo_ContentMedium_Old:
-			case ABTestGroup.RewardedNo_ContentMedium_Revealed:
-				this.m_adText.SetActive(AdsWrapper.Instance.IsVideoAvailable());
-				break;
-			default:
+		// switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// {
+		// 	case ABTestGroup.None:
+		// 	case ABTestGroup.RewardedNo_ContentEasy:
+		// 	case ABTestGroup.RewardedNo_ContentMedium_Old:
+		// 	case ABTestGroup.RewardedNo_ContentMedium_Revealed:
+		// 		this.m_adText.SetActive(AdsWrapper.Instance.IsVideoAvailable());
+		// 		break;
+		// 	default:
 				this.m_adText.SetActive(false);
-				break;
-		}
+				// break;
+		// }
 	}
 
 	private void OnPurchaseHandler(bool res, SubscriptionType subscrType)
@@ -127,13 +127,13 @@ public class BombButton : MonoBehaviour
 
 	public void Click()
 	{
-		if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
-		{
-			while (WorkbookModel.Instance.SpecBoostersModel.BombCount < 5)
-			{
-				WorkbookModel.Instance.SpecBoostersModel.AddBomb();
-			}
-		}
+		// if (IAPWrapper.Instance.NoAds || IAPWrapper.Instance.Subscribed)
+		// {
+		// 	while (WorkbookModel.Instance.SpecBoostersModel.BombCount < 5)
+		// 	{
+		// 		WorkbookModel.Instance.SpecBoostersModel.AddBomb();
+		// 	}
+		// }
 		if (WorkbookModel.Instance.SpecBoostersModel.BombCount <= 0)
 		{
 			this.PlusClick();
@@ -141,59 +141,59 @@ public class BombButton : MonoBehaviour
 		else
 		{
 			WorkbookModel.Instance.SpecBoostersModel.ChangeBombMode(false);
-			if (WorkbookModel.Instance.SpecBoostersModel.BombMode)
-			{
-				AnalyticsManager.Instance.BombClicked(WorkbookModel.Instance.SpecBoostersModel.BombCount);
-			}
+			// if (WorkbookModel.Instance.SpecBoostersModel.BombMode)
+			// {
+				// AnalyticsManager.Instance.BombClicked(WorkbookModel.Instance.SpecBoostersModel.BombCount);
+			// }
 		}
 	}
 
 	public void PlusClick()
 	{
-		AnalyticsManager.Instance.BombAddClick(WorkbookModel.Instance.SpecBoostersModel.BombCount);
-		if (!IAPWrapper.Instance.NoAds && !IAPWrapper.Instance.Subscribed)
-		{
-			switch (INPluginWrapper.Instance.GetAbTestGroup())
-			{
-				case ABTestGroup.None:
-				case ABTestGroup.RewardedNo_ContentEasy:
-				case ABTestGroup.RewardedNo_ContentMedium_Old:
-				case ABTestGroup.RewardedNo_ContentMedium_Revealed:
-					if (AdsWrapper.Instance.IsVideoAvailable())
-					{
-						AdsWrapper.Instance.ShowVideo("grenade", delegate (bool res)
-						{
-							if (res)
-							{
-								WorkbookModel.Instance.SpecBoostersModel.AddBomb();
-								WorkbookModel.Instance.SpecBoostersModel.ChangeBombMode(true);
-							}
-						});
-					}
-					break;
-				default:
-					if (AdsWrapper.Instance.IsVideoAvailable())
-					{
-						IapPopup abWindow = WindowManager.Instance.OpenAbTestWindow();
-						abWindow.Init(delegate (bool res)
-						{
-							if (res)
-							{
-								WorkbookModel.Instance.SpecBoostersModel.AddBomb();
-								WorkbookModel.Instance.SpecBoostersModel.ChangeBombMode(true);
-								WindowManager.Instance.CloseMe(abWindow);
-							}
-						}, ABTestGroup.RewardedYes_ContentHard, AbTestWindowMode.Bomb);
-					}
-					else
-					{
-						var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
-						trialInappsWindow.Init("grenade", null);//, false, false);
-					}
-					break;
-			}
-		}
-		else
+		// AnalyticsManager.Instance.BombAddClick(WorkbookModel.Instance.SpecBoostersModel.BombCount);
+		// if (!IAPWrapper.Instance.NoAds && !IAPWrapper.Instance.Subscribed)
+		// {
+		// 	switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// 	{
+		// 		case ABTestGroup.None:
+		// 		case ABTestGroup.RewardedNo_ContentEasy:
+		// 		case ABTestGroup.RewardedNo_ContentMedium_Old:
+		// 		case ABTestGroup.RewardedNo_ContentMedium_Revealed:
+		// 			if (AdsWrapper.Instance.IsVideoAvailable())
+		// 			{
+		// 				AdsWrapper.Instance.ShowVideo("grenade", delegate (bool res)
+		// 				{
+		// 					if (res)
+		// 					{
+		// 						WorkbookModel.Instance.SpecBoostersModel.AddBomb();
+		// 						WorkbookModel.Instance.SpecBoostersModel.ChangeBombMode(true);
+		// 					}
+		// 				});
+		// 			}
+		// 			break;
+		// 		default:
+		// 			if (AdsWrapper.Instance.IsVideoAvailable())
+		// 			{
+		// 				IapPopup abWindow = WindowManager.Instance.OpenAbTestWindow();
+		// 				abWindow.Init(delegate (bool res)
+		// 				{
+		// 					if (res)
+		// 					{
+		// 						WorkbookModel.Instance.SpecBoostersModel.AddBomb();
+		// 						WorkbookModel.Instance.SpecBoostersModel.ChangeBombMode(true);
+		// 						WindowManager.Instance.CloseMe(abWindow);
+		// 					}
+		// 				}, ABTestGroup.RewardedYes_ContentHard, AbTestWindowMode.Bomb);
+		// 			}
+		// 			else
+		// 			{
+		// 				var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
+		// 				trialInappsWindow.Init("grenade", null);//, false, false);
+		// 			}
+		// 			break;
+		// 	}
+		// }
+		// else
 		{
 			WorkbookModel.Instance.SpecBoostersModel.AddBomb();
 			WorkbookModel.Instance.SpecBoostersModel.ChangeBombMode(true);
@@ -211,10 +211,10 @@ public class BombButton : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		AdsWrapper instance = AdsWrapper.Instance;
-		instance.OnVideoAvailabilityChanged = (Action)Delegate.Remove(instance.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
-		IAPWrapper instance2 = IAPWrapper.Instance;
-		instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// AdsWrapper instance = AdsWrapper.Instance;
+		// instance.OnVideoAvailabilityChanged = (Action)Delegate.Remove(instance.OnVideoAvailabilityChanged, new Action(this.OnVideoAvailabilityChangedHandler));
+		// IAPWrapper instance2 = IAPWrapper.Instance;
+		// instance2.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance2.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 	}
 }
 

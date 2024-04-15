@@ -61,8 +61,8 @@ public class SettingsWindow : BaseWindow
 		this.m_loupeSwitcher.UpdateState(AppData.LoupeEnabled, true);
 		this.m_vibroRightPart.SetActive(VibroWrapper.IsVibroAvailable());
 		this.m_vibroWrongPart.SetActive(VibroWrapper.IsVibroAvailable());
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandlerRemoveAds));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandlerRemoveAds));
 		this.OnPurchaseHandlerRemoveAds(false, SubscriptionType.remove_ads);
 	}
 
@@ -85,7 +85,7 @@ public class SettingsWindow : BaseWindow
 		AppData.SoundsEnabled = !AppData.SoundsEnabled;
 		this.m_soundsSwitcher.UpdateState(AppData.SoundsEnabled, false);
 		AudioManager.Instance.PlayClick();
-		INPluginWrapper.Instance.UpdateSoundState();
+		// INPluginWrapper.Instance.UpdateSoundState();
 
 		if (BackgroundMusic.musicMgr != null)
 		{
@@ -127,7 +127,7 @@ public class SettingsWindow : BaseWindow
 
 	public void RateUsButtonClick()
 	{
-		AnalyticsManager.Instance.RateUsClicked();
+		// AnalyticsManager.Instance.RateUsClicked();
 		RateUsTool.OpenRateUs();
 		AudioManager.Instance.PlayClick();
 	}
@@ -159,69 +159,69 @@ public class SettingsWindow : BaseWindow
 
 	public void MoreAppsButtonClick()
 	{
-		AnalyticsManager.Instance.MoreAppsClicked();
+		// AnalyticsManager.Instance.MoreAppsClicked();
 		Application.OpenURL("https://play.google.com/store/apps/dev?id=6817085628932553524");
 	}
 
 	public void RemoveAdsClick()
 	{
-		IAPWrapper.Instance.BuyProduct(SubscriptionType.remove_ads, "settings", null);
+		// IAPWrapper.Instance.BuyProduct(SubscriptionType.remove_ads, "settings", null);
 	}
 
 	private void OnPurchaseHandlerRemoveAds(bool res, SubscriptionType subscrType)
 	{
-		switch (INPluginWrapper.Instance.GetAbTestGroup())
-		{
-			case ABTestGroup.None:
-			case ABTestGroup.RewardedNo_ContentEasy:
-			case ABTestGroup.RewardedNo_ContentMedium_Old:
-			case ABTestGroup.RewardedNo_ContentMedium_Revealed:
-				this.m_removeAdsButton.SetActive(!IAPWrapper.Instance.NoAds);
-				break;
-			default:
-				this.m_removeAdsButton.SetActive(false);
-				break;
-		}
+		// switch (INPluginWrapper.Instance.GetAbTestGroup())
+		// {
+		// 	case ABTestGroup.None:
+		// 	case ABTestGroup.RewardedNo_ContentEasy:
+		// 	case ABTestGroup.RewardedNo_ContentMedium_Old:
+		// 	case ABTestGroup.RewardedNo_ContentMedium_Revealed:
+		// 		this.m_removeAdsButton.SetActive(!IAPWrapper.Instance.NoAds);
+		// 		break;
+		// 	default:
+		// 		this.m_removeAdsButton.SetActive(false);
+		// 		break;
+		// }
 	}
 
 	public void RestoreButtonClick()
 	{
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
-		base.StartCoroutine(this.WaitForRestored());
-		IAPWrapper.Instance.RestorePurchases(null);
-		AnalyticsManager.Instance.RestoreButtonClicked();
-		AudioManager.Instance.PlayClick();
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Combine(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// base.StartCoroutine(this.WaitForRestored());
+		// IAPWrapper.Instance.RestorePurchases(null);
+		// AnalyticsManager.Instance.RestoreButtonClicked();
+		// AudioManager.Instance.PlayClick();
 	}
 
 	private void OnPurchaseHandler(bool res, SubscriptionType type)
 	{
-		this.restoredAnything = true;
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// this.restoredAnything = true;
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
 	}
 	public void ChangeGroupButtonClick()
 	{
-		ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
-		abTestGroup++;
-		if (abTestGroup > ABTestGroup.RewardedNo_ContentMedium_Revealed)
-		{
-			abTestGroup = ABTestGroup.None;
-		}
-		INPluginWrapper.Instance.SetDefaultAbTestGroup(abTestGroup);
-		this.UpdateGroupText();
-		this.OnPurchaseHandlerRemoveAds(false, SubscriptionType.remove_ads);
+		// ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
+		// abTestGroup++;
+		// if (abTestGroup > ABTestGroup.RewardedNo_ContentMedium_Revealed)
+		// {
+		// 	abTestGroup = ABTestGroup.None;
+		// }
+		// INPluginWrapper.Instance.SetDefaultAbTestGroup(abTestGroup);
+		// this.UpdateGroupText();
+		// this.OnPurchaseHandlerRemoveAds(false, SubscriptionType.remove_ads);
 	}
 
 	private void UpdateGroupText()
 	{
-		this.m_groupText.text = INPluginWrapper.Instance.GetAbTestGroup().ToString();
+		// this.m_groupText.text = INPluginWrapper.Instance.GetAbTestGroup().ToString();
 	}
 
 	public void CloseButtonClick()
 	{
 		WindowManager.Instance.CloseMe(this);
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 		AudioManager.Instance.PlayClick();
 	}
 
@@ -232,39 +232,39 @@ public class SettingsWindow : BaseWindow
 
 	private void OnDestroy()
 	{
-		IAPWrapper instance = IAPWrapper.Instance;
-		instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandlerRemoveAds));
+		// IAPWrapper instance = IAPWrapper.Instance;
+		// instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandlerRemoveAds));
 	}
 	private IEnumerator WaitForRestored()
 	{
-		var timer = 2f;
-		while (true)
-		{
-			if (timer > 0f)
-			{
-				timer -= Time.deltaTime;
+		// var timer = 2f;
+		// while (true)
+		// {
+		// 	if (timer > 0f)
+		// 	{
+		// 		timer -= Time.deltaTime;
 				yield return null;
-				continue;
-			}
-			IAPWrapper instance = IAPWrapper.Instance;
-			instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
-			if (this.restoredAnything)
-			{
-				if (IAPWrapper.Instance.Subscribed)
-				{
-					AnalyticsManager.Instance.PurchasesRestored();
-					this.m_popup.Show(LocalizationManager.Instance.GetString("restored1"));
-				}
-				else
-				{
-					this.m_popup.Show(LocalizationManager.Instance.GetString("restored2"));
-				}
-			}
-			else
-			{
-				this.m_popup.Show(LocalizationManager.Instance.GetString("restored0"));
-			}
-			yield break;
-		}
+		// 		continue;
+		// 	}
+		// 	IAPWrapper instance = IAPWrapper.Instance;
+		// 	instance.OnPurchase = (Action<bool, SubscriptionType>)Delegate.Remove(instance.OnPurchase, new Action<bool, SubscriptionType>(this.OnPurchaseHandler));
+		// 	if (this.restoredAnything)
+		// 	{
+		// 		if (IAPWrapper.Instance.Subscribed)
+		// 		{
+		// 			AnalyticsManager.Instance.PurchasesRestored();
+		// 			this.m_popup.Show(LocalizationManager.Instance.GetString("restored1"));
+		// 		}
+		// 		else
+		// 		{
+		// 			this.m_popup.Show(LocalizationManager.Instance.GetString("restored2"));
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		this.m_popup.Show(LocalizationManager.Instance.GetString("restored0"));
+		// 	}
+		// 	yield break;
+		// }
 	}
 }

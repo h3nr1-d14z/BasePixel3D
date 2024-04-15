@@ -20,20 +20,20 @@ public class ImageInfo : IAccessStatusInfo
 	{
 		get
 		{
-			if (!IAPWrapper.Instance.Subscribed && !IAPWrapper.Instance.NoAds)
-			{
-				switch (INPluginWrapper.Instance.GetAbTestGroup())
-				{
-					case ABTestGroup.RewardedNo_ContentEasy:
-						return AccessStatus.Free;
-					case ABTestGroup.RewardedYes_ContentHard:
-					case ABTestGroup.RewardedNo_ContentHard:
-					case ABTestGroup.Rewarded_yes_content_hard_no1screen:
-						return (AccessStatus)((this.AccessStatus == AccessStatus.Free) ? 1 : 0);
-					default:
-						return this.AccessStatus;
-				}
-			}
+			// if (!IAPWrapper.Instance.Subscribed && !IAPWrapper.Instance.NoAds)
+			// {
+				// switch (INPluginWrapper.Instance.GetAbTestGroup())
+				// {
+					// case ABTestGroup.RewardedNo_ContentEasy:
+						// return AccessStatus.Free;
+					// case ABTestGroup.RewardedYes_ContentHard:
+					// case ABTestGroup.RewardedNo_ContentHard:
+					// case ABTestGroup.Rewarded_yes_content_hard_no1screen:
+						// return (AccessStatus)((this.AccessStatus == AccessStatus.Free) ? 1 : 0);
+					// default:
+						// return this.AccessStatus;
+				// }
+			// }
 			return AccessStatus.Free;
 		}
 	}

@@ -102,7 +102,7 @@ public class TextureScale
 				TextureScale.PointScale(obj);
 			}
 		}
-		tex.Resize(newWidth, newHeight);
+		tex.Reinitialize(newWidth, newHeight);
 		tex.SetPixels(TextureScale.newColors);
 		tex.Apply();
 		TextureScale.texColors = null;

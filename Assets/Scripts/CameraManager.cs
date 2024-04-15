@@ -102,10 +102,10 @@ public class CameraManager : MonoBehaviour
 		this.m_zeroBounds = new Rect(-width / halfSize / 2f, -height / halfSize / 2f, width / halfSize, height / halfSize);
 
         float offsetTop = -0.4f;
-        if (AdsWrapper.Instance.bannerEnabled)
-        {
+        // if (AdsWrapper.Instance.bannerEnabled)
+        // {
             offsetTop = -0.3f;
-        }
+        // }
 
         this.m_zeroBounds.center = new Vector2(0f, offsetTop);
 		this.m_bounds.center = new Vector2(0f, offsetTop);

@@ -380,9 +380,9 @@ public abstract class BaseWindow : MonoBehaviour
 
 	public virtual void SendActiveScreenEvent()
 	{
-		if (!string.IsNullOrEmpty(this.WindowName) && INPluginWrapper.Instance != null)
-		{
-			INPluginWrapper.Instance.SetActiveScreen(this.WindowName);
-		}
+		// if (!string.IsNullOrEmpty(this.WindowName) && INPluginWrapper.Instance != null)
+		// {
+			// INPluginWrapper.Instance.SetActiveScreen(this.WindowName);
+		// }
 	}
 }

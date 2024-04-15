@@ -204,62 +204,64 @@ public class MyPhotosWindow : BaseWindow
 		DailyGame.ResetState(false);
 		if (string.IsNullOrEmpty(photoInfo.Id))
 		{
-			if (AppData.FreePhotos > 0 || IAPWrapper.Instance.NoAds)
-			{
+			// if (AppData.FreePhotos > 0 
+			//     // || IAPWrapper.Instance.NoAds
+			//     )
+			// {
 				CreationWindow creationWindow = WindowManager.Instance.OpenCreationWindow();
 				creationWindow.Init(delegate (PhotoInfo info)
 				{
 					this.NewImageButtonClick(info, ImageOpenType.New);
-					AppData.FreePhotos--;
+					// AppData.FreePhotos--;
 				});
-			}
-			else if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentEasy)
-			{
-				if (AdsWrapper.Instance.IsVideoAvailable())
-				{
-					AdsWrapper.Instance.ShowVideo("photo", delegate (bool res)
-					{
-						if (res)
-						{
-							CreationWindow creationWindow3 = WindowManager.Instance.OpenCreationWindow();
-							creationWindow3.Init(delegate (PhotoInfo info)
-							{
-								this.NewImageButtonClick(info, ImageOpenType.New);
-							});
-						}
-					});
-				}
-			}
-			else if (AdsWrapper.Instance.IsVideoAvailable())
-			{
-				IapPopup abWindow = WindowManager.Instance.OpenAbTestWindow();
-				abWindow.Init(delegate (bool res)
-				{
-					if (res)
-					{
-						CreationWindow creationWindow2 = WindowManager.Instance.OpenCreationWindow();
-						creationWindow2.Init(delegate (PhotoInfo info)
-						{
-							this.NewImageButtonClick(info, ImageOpenType.New);
-							WindowManager.Instance.CloseMe(abWindow);
-						});
-					}
-				}, ABTestGroup.RewardedYes_ContentHard, AbTestWindowMode.Photo);
-			}
-			else
-			{
-				ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
-				if (abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Old || abTestGroup == ABTestGroup.None)
-				{
-					NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
-					newInappsWindow.Init("photo", null);
-				}
-				else
-				{
-					var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
-					trialInappsWindow.Init("photo", null);//, false, false);
-				}
-			}
+			// }
+			// else if (INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentEasy)
+			// {
+			// 	if (AdsWrapper.Instance.IsVideoAvailable())
+			// 	{
+			// 		AdsWrapper.Instance.ShowVideo("photo", delegate (bool res)
+			// 		{
+			// 			if (res)
+			// 			{
+			// 				CreationWindow creationWindow3 = WindowManager.Instance.OpenCreationWindow();
+			// 				creationWindow3.Init(delegate (PhotoInfo info)
+			// 				{
+			// 					this.NewImageButtonClick(info, ImageOpenType.New);
+			// 				});
+			// 			}
+			// 		});
+			// 	}
+			// }
+			// else if (AdsWrapper.Instance.IsVideoAvailable())
+			// {
+			// 	IapPopup abWindow = WindowManager.Instance.OpenAbTestWindow();
+			// 	abWindow.Init(delegate (bool res)
+			// 	{
+			// 		if (res)
+			// 		{
+			// 			CreationWindow creationWindow2 = WindowManager.Instance.OpenCreationWindow();
+			// 			creationWindow2.Init(delegate (PhotoInfo info)
+			// 			{
+			// 				this.NewImageButtonClick(info, ImageOpenType.New);
+			// 				WindowManager.Instance.CloseMe(abWindow);
+			// 			});
+			// 		}
+			// 	}, ABTestGroup.RewardedYes_ContentHard, AbTestWindowMode.Photo);
+			// }
+			// else
+			// {
+			// 	ABTestGroup abTestGroup = INPluginWrapper.Instance.GetAbTestGroup();
+			// 	if (abTestGroup == ABTestGroup.RewardedNo_ContentMedium_Old || abTestGroup == ABTestGroup.None)
+			// 	{
+			// 		NewInappsWindow newInappsWindow = WindowManager.Instance.OpenInappsWindow();
+			// 		newInappsWindow.Init("photo", null);
+			// 	}
+			// 	else
+			// 	{
+			// 		var trialInappsWindow = WindowManager.Instance.OpenInappsWindow();
+			// 		trialInappsWindow.Init("photo", null);//, false, false);
+			// 	}
+			// }
 		}
 		else
 		{
@@ -282,7 +284,7 @@ public class MyPhotosWindow : BaseWindow
 
 	public void DrawButtonClick(PhotoInfo photoInfo, ISavedWorkData swd)
 	{
-		AnalyticsManager.Instance.ImageSelected(new ImageInfo(photoInfo.Id, photoInfo.Source.ToString().ToLower()));
+		// AnalyticsManager.Instance.ImageSelected(new ImageInfo(photoInfo.Id, photoInfo.Source.ToString().ToLower()));
 		if (!this.m_lock && this.m_currentGroupIndex >= 0)
 		{
 			this.m_lock = true;
@@ -352,18 +354,18 @@ public class MyPhotosWindow : BaseWindow
 	public void DeleteButtonClick(string photoId)
 	{
 		this.m_bigPreview.Close();
-		AnalyticsManager.Instance.DeleteButtonClick();
-		DialogToolWrapper.ShowDeleteDialog(delegate (bool res)
-		{
-			if (res)
-			{
-				AnalyticsManager.Instance.DeleteSuccess();
+		// AnalyticsManager.Instance.DeleteButtonClick();
+		// DialogToolWrapper.ShowDeleteDialog(delegate (bool res)
+		// {
+		// 	if (res)
+		// 	{
+				// AnalyticsManager.Instance.DeleteSuccess();
 				MainManager.Instance.SavedWorksList.DeletePhoto(photoId);
 				this.m_currentGroupIndex = -1;
 				this.m_lock = false;
 				this.Reinit();
-			}
-		});
+		// 	}
+		// });
 	}
 
 	public void ShareButtonClick(string saveId)

@@ -44,7 +44,7 @@ public class TutorialWindow : BaseWindow
 			((RectTransform)page.transform).sizeDelta = new Vector2(((RectTransform)base.transform).rect.width, ((RectTransform)base.transform).rect.height);
 		}
 		this.m_positScrollRect.Reinit(0f, false);
-		AnalyticsManager.Instance.TutorOpened(placement, type);
+		// AnalyticsManager.Instance.TutorOpened(placement, type);
 		this.UpdatePoint();
 		 
 		AppData.TutorialCompleted = true; 
@@ -87,14 +87,14 @@ public class TutorialWindow : BaseWindow
 
 	public void CloseButtonClick()
 	{
-		AnalyticsManager.Instance.TutorClosed(this.m_placement, this.m_type, this.m_currentIndex + 1);
+		// AnalyticsManager.Instance.TutorClosed(this.m_placement, this.m_type, this.m_currentIndex + 1);
 		WindowManager.Instance.CloseMe(this);
 		AudioManager.Instance.PlayClick();
 	}
 
 	public void StartButtonClick()
 	{
-		AnalyticsManager.Instance.TutorClosed(this.m_placement, this.m_type, this.m_currentIndex + 1);
+		// AnalyticsManager.Instance.TutorClosed(this.m_placement, this.m_type, this.m_currentIndex + 1);
 		WindowManager.Instance.CloseMe(this);
 		AudioManager.Instance.PlayClick();
 	}

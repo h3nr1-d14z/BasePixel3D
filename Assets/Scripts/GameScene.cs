@@ -171,21 +171,21 @@ internal class GameScene : BaseScene
 	
 	private IEnumerator StopInitAndShowInterCoroutine()
 	{
-		if ((INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed) && (this.m_imageInfo == null || this.m_imageInfo.CustomAccessStatus != 0) && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id))
-		{
-			this.m_stopInit = false;
-			yield break;
-		}
-		if (!IAPWrapper.Instance.NoAds && AppData.TutorialCompleted)
-		{
-			yield return new WaitForSeconds(0.1f);
-			if (AdsWrapper.Instance.ShowInter("preview"))
+		// if ((INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed) && (this.m_imageInfo == null || this.m_imageInfo.CustomAccessStatus != 0) && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(this.m_imageInfo.Id))
+		// {
+		// 	this.m_stopInit = false;
+		// 	yield break;
+		// }
+		// if (!IAPWrapper.Instance.NoAds && AppData.TutorialCompleted)
+		// {
+			// yield return new WaitForSeconds(0.1f);
+			// if (AdsWrapper.Instance.ShowInter("preview"))
 			{
-				yield return new WaitForSeconds(1f); 
+				// yield return new WaitForSeconds(1f); 
 				this.m_stopInit = false;
 				yield break;
 			}
-		}
+		// }
 		this.m_stopInit = false;
 	}
 	private IEnumerator InitCoroutine(ImageInfo info, CashImage3D vox, SavedWorkData3D savedWorkData, ImageOpenType imageOpenType)
@@ -200,13 +200,13 @@ internal class GameScene : BaseScene
 				yield return null;
 				continue;
 			}
-			if (INPluginWrapper.Instance.IsAdShown())
-			{
-				yield return null;
-				continue;
-			}
+			// if (INPluginWrapper.Instance.IsAdShown())
+			// {
+			// 	yield return null;
+			// 	continue;
+			// }
 			bool video = false;
-			if ((INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed) && info.CustomAccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(info.Id))
+			// if ((INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.None || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Old || INPluginWrapper.Instance.GetAbTestGroup() == ABTestGroup.RewardedNo_ContentMedium_Revealed) && info.CustomAccessStatus != 0 && !IAPWrapper.Instance.Subscribed && !AppData.UnlockedImages.Contains(info.Id))
 			{
 				this.m_videoWaiter.SetActive(true); 
 				AppData.UnlockedImages.Add(info.Id);
@@ -215,24 +215,24 @@ internal class GameScene : BaseScene
 				{ 
 #if UNITY_EDITOR
 					video = true; 
-					AdsWrapper.Instance.ShowVideo("image", null);
+					// AdsWrapper.Instance.ShowVideo("image", null);
 #elif UNITY_ANDROID
 					var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
                     var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
                     activity.Call("runOnUiThread", (AndroidJavaRunnable)delegate
                     {
-                        if (AdsWrapper.Instance.IsVideoAvailable())
-                        {
+                        // if (AdsWrapper.Instance.IsVideoAvailable())
+                        // {
                             video = true;
-                            AdsWrapper.Instance.ShowVideo("image", null);
-                        }
+                            // AdsWrapper.Instance.ShowVideo("image", null);
+                        // }
                     });
 #else
-					if (AdsWrapper.Instance.IsVideoAvailable())
-					{
+					// if (AdsWrapper.Instance.IsVideoAvailable())
+					// {
 						video = true;
-						AdsWrapper.Instance.ShowVideo("image", null);
-					}	
+						// AdsWrapper.Instance.ShowVideo("image", null);
+					// }	
 #endif
 					yield return new WaitForSeconds(1f);
 
@@ -250,7 +250,7 @@ internal class GameScene : BaseScene
 			UnitySingleton<GameController>.Instance.VoxLoadComplete += new Action<List<Color>>(this.VoxLoadCompleteHandler);
 			UnitySingleton<GameController>.Instance.VideoCamera = this.videoCamera;
 			this.LoadCustomVox(vox);
-			AnalyticsManager.Instance.ImageOpened(info, (int)vox.CubesCount, vox.ColorsCount.Count, imageOpenType);
+			// AnalyticsManager.Instance.ImageOpened(info, (int)vox.CubesCount, vox.ColorsCount.Count, imageOpenType);
 			yield break;
 		}
 	}

@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using Tools.TextureOptimization;
+// using Tools.TextureOptimization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -120,46 +120,46 @@ public class CreationWindow : BaseWindow
 		this.m_currentSource = (PhotoSource)((!this.m_cameraPlugin.CurrentDevice.isFrontFacing) ? 2 : 3);
 	}
 
-	public void GalleryButtonClicked()
-	{
-		if (!UnitySingleton<PickerController>.Instance.IsInit())
-		{
-			PickerController instance = UnitySingleton<PickerController>.Instance;
-			instance.InitComplete = (Action<bool>)Delegate.Combine(instance.InitComplete, new Action<bool>(this.AfterInitPicker));
-			UnitySingleton<PickerController>.Instance.Subscribe(new Action<Texture2D>(this.GetImageFromGallery), null, null, null);
-			UnitySingleton<PickerController>.Instance.Initilized();
-		}
-		else
-		{
-			UnitySingleton<PickerController>.Instance.Subscribe(new Action<Texture2D>(this.GetImageFromGallery), null, null, null);
-			UnitySingleton<PickerController>.Instance.OpenGallery();
-		}
-	}
+	// public void GalleryButtonClicked()
+	// {
+	// 	if (!UnitySingleton<PickerController>.Instance.IsInit())
+	// 	{
+	// 		PickerController instance = UnitySingleton<PickerController>.Instance;
+	// 		instance.InitComplete = (Action<bool>)Delegate.Combine(instance.InitComplete, new Action<bool>(this.AfterInitPicker));
+	// 		UnitySingleton<PickerController>.Instance.Subscribe(new Action<Texture2D>(this.GetImageFromGallery), null, null, null);
+	// 		UnitySingleton<PickerController>.Instance.Initilized();
+	// 	}
+	// 	else
+	// 	{
+	// 		UnitySingleton<PickerController>.Instance.Subscribe(new Action<Texture2D>(this.GetImageFromGallery), null, null, null);
+	// 		UnitySingleton<PickerController>.Instance.OpenGallery();
+	// 	}
+	// }
 
-	private void AfterInitPicker(bool isInit)
-	{
-		PickerController instance = UnitySingleton<PickerController>.Instance;
-		instance.InitComplete = (Action<bool>)Delegate.Remove(instance.InitComplete, new Action<bool>(this.AfterInitPicker));
-		if (isInit)
-		{
-			UnitySingleton<PickerController>.Instance.OpenGallery();
-		}
-	}
+	// private void AfterInitPicker(bool isInit)
+	// {
+	// 	PickerController instance = UnitySingleton<PickerController>.Instance;
+	// 	instance.InitComplete = (Action<bool>)Delegate.Remove(instance.InitComplete, new Action<bool>(this.AfterInitPicker));
+	// 	if (isInit)
+	// 	{
+	// 		UnitySingleton<PickerController>.Instance.OpenGallery();
+	// 	}
+	// }
 
-	private void GetImageFromGallery(Texture2D texture)
-	{
-		UnitySingleton<PickerController>.Instance.UnSubscribe(new Action<Texture2D>(this.GetImageFromGallery), null, null, null);
-		this.m_fullTexture = texture;
-		this.m_image.texture = texture;
-		this.m_image.rectTransform.localEulerAngles = Vector3.zero;
-		this.m_currentImageZoom = 1f;
-		this.UpdateTextureScale();
-		this.UpdateTexture(true);
-		this.m_okButtonsBlock.SetActive(true);
-		this.m_firstButtonsBlock.SetActive(false);
-		this.m_cameraPlugin.Stop();
-		this.m_currentSource = PhotoSource.Album;
-	}
+	// private void GetImageFromGallery(Texture2D texture)
+	// {
+	// 	UnitySingleton<PickerController>.Instance.UnSubscribe(new Action<Texture2D>(this.GetImageFromGallery), null, null, null);
+	// 	this.m_fullTexture = texture;
+	// 	this.m_image.texture = texture;
+	// 	this.m_image.rectTransform.localEulerAngles = Vector3.zero;
+	// 	this.m_currentImageZoom = 1f;
+	// 	this.UpdateTextureScale();
+	// 	this.UpdateTexture(true);
+	// 	this.m_okButtonsBlock.SetActive(true);
+	// 	this.m_firstButtonsBlock.SetActive(false);
+	// 	this.m_cameraPlugin.Stop();
+	// 	this.m_currentSource = PhotoSource.Album;
+	// }
 
 	private void OnImageDraggedHandler(Vector2 delta)
 	{
@@ -274,25 +274,25 @@ public class CreationWindow : BaseWindow
 		GameHelper.CamScaleTexture((Texture2D)this.m_image.texture, 40, 1f, this.m_qualitySlider.value); 
 	}
 
-	public void OkButtonClick()
-	{
-		string text = Guid.NewGuid().ToString();
-		Texture2D texture2D = (Texture2D)this.m_image.texture;
-		int numberOfColors = (int)Mathf.Lerp(15f, 50f, (this.m_qualitySlider.value - this.m_qualitySlider.minValue) / (this.m_qualitySlider.maxValue - this.m_qualitySlider.minValue));
-		if (TextureColoring.CheckToNeedConverColor(texture2D, numberOfColors))
-		{
-			texture2D = TextureColorsReducer.Process(texture2D, numberOfColors);
-		}
-		File.WriteAllBytes(AppPathsConfig.DownloadsPath + text + ".png", texture2D.EncodeToPNG());
-		PhotoInfo photoInfo = new PhotoInfo(text, this.m_currentSource);
-		MainManager.Instance.SavedWorksList.AddPhoto(photoInfo);
-		this.OnCreate.SafeInvoke(photoInfo);
-	}
+	// public void OkButtonClick()
+	// {
+	// 	string text = Guid.NewGuid().ToString();
+	// 	Texture2D texture2D = (Texture2D)this.m_image.texture;
+	// 	int numberOfColors = (int)Mathf.Lerp(15f, 50f, (this.m_qualitySlider.value - this.m_qualitySlider.minValue) / (this.m_qualitySlider.maxValue - this.m_qualitySlider.minValue));
+	// 	if (TextureColoring.CheckToNeedConverColor(texture2D, numberOfColors))
+	// 	{
+	// 		texture2D = TextureColorsReducer.Process(texture2D, numberOfColors);
+	// 	}
+	// 	File.WriteAllBytes(AppPathsConfig.DownloadsPath + text + ".png", texture2D.EncodeToPNG());
+	// 	PhotoInfo photoInfo = new PhotoInfo(text, this.m_currentSource);
+	// 	MainManager.Instance.SavedWorksList.AddPhoto(photoInfo);
+	// 	this.OnCreate.SafeInvoke(photoInfo);
+	// }
 
 	public void CloseButtonClick()
 	{
 		WindowManager.Instance.CloseMe(this);
-		AnalyticsManager.Instance.BackButtonClicked();
+		// AnalyticsManager.Instance.BackButtonClicked();
 	}
 
 	public override bool Close()

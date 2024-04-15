@@ -30,13 +30,13 @@ public class WindowManager : MonoBehaviour
 
 	private HelpWindow m_helpWindow;
 
-	private DetailsWindow m_detailsWindow;
-
-	private NewInappsWindow m_inappsWindow;
-
-	private TrialInappsWindow m_trialInappsWindow;
-
-	private IapPopup m_abTestWindow;
+	// private DetailsWindow m_detailsWindow;
+	//
+	// private NewInappsWindow m_inappsWindow;
+	//
+	// private TrialInappsWindow m_trialInappsWindow;
+	//
+	// private IapPopup m_abTestWindow;
 
 	private TutorialWindow m_tutorialWindow;
 
@@ -76,7 +76,7 @@ public class WindowManager : MonoBehaviour
 			this.m_mainMenu = ((Component)this.m_uiParent.Find("main_menu")).GetComponent<MainMenu>();
 		}
 		this.m_openedWindows.Add(this.m_mainMenu);
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_mainMenu.InitCanvas(this.m_canvas, true);
 		this.m_mainMenu.Open();
 		return this.m_mainMenu;
@@ -99,7 +99,7 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_creationWindow);
 		this.m_creationWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_creationWindow.InitCanvas(this.m_canvas, true);
 		this.m_creationWindow.Open();
 		return this.m_creationWindow;
@@ -117,7 +117,7 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_dailyArtWindow);
 		this.m_dailyArtWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_dailyArtWindow.InitCanvas(this.m_canvas, true);
 		this.m_dailyArtWindow.Open();
 		return this.m_dailyArtWindow;
@@ -130,7 +130,7 @@ public class WindowManager : MonoBehaviour
 			this.m_workbook = ((Component)this.m_uiParent.Find("workbook")).GetComponent<NewWorkbook>();
 		}
 		this.m_openedWindows.Add(this.m_workbook);
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_workbook.InitCanvas(this.m_canvas, true);
 		this.m_workbook.Open();
 		return this.m_workbook;
@@ -143,7 +143,7 @@ public class WindowManager : MonoBehaviour
 			this.m_workbook3D = ((Component)this.m_uiParent.Find("workbook")).GetComponent<NewWorkbook3D>();
 		}
 		this.m_openedWindows.Add(this.m_workbook3D);
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_workbook3D.InitCanvas(this.m_canvas, true);
 		this.m_workbook3D.Open();
 		return this.m_workbook3D;
@@ -165,7 +165,7 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_tutorialWindow);
 		this.m_tutorialWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_tutorialWindow.InitCanvas(this.m_canvas, true);
 		this.m_tutorialWindow.Open();
 		return this.m_tutorialWindow;
@@ -189,7 +189,7 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_tutorialWindow3D);
 		this.m_tutorialWindow3D.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_tutorialWindow3D.InitCanvas(this.m_canvas, true);
 		this.m_tutorialWindow3D.Open();
 		return this.m_tutorialWindow3D;
@@ -207,7 +207,7 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_filterWindow);
 		this.m_filterWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_filterWindow.InitCanvas(this.m_canvas, true);
 		this.m_filterWindow.Open();
 		return this.m_filterWindow;
@@ -240,10 +240,10 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_shareWindow);
 		this.m_shareWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_shareWindow.InitCanvas(this.m_canvas, true);
 		this.m_shareWindow.Open();
-		AnalyticsManager.Instance.ShareWindowOpened();
+		// AnalyticsManager.Instance.ShareWindowOpened();
 		return this.m_shareWindow;
 	}
 
@@ -259,10 +259,10 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_settingsWindow);
 		this.m_settingsWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_settingsWindow.InitCanvas(this.m_canvas, true);
 		this.m_settingsWindow.Open();
-		AnalyticsManager.Instance.SettingsWindowOpened();
+		// AnalyticsManager.Instance.SettingsWindowOpened();
 		return this.m_settingsWindow;
 	}
 
@@ -278,48 +278,48 @@ public class WindowManager : MonoBehaviour
 		}
 		this.m_openedWindows.Add(this.m_helpWindow);
 		this.m_helpWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+		// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 		this.m_helpWindow.InitCanvas(this.m_canvas, true);
 		this.m_helpWindow.Open();
-		AnalyticsManager.Instance.HelpWindowOpened();
+		// AnalyticsManager.Instance.HelpWindowOpened();
 		return this.m_helpWindow;
 	}
 
-	public DetailsWindow OpenDetailsWindow()
-	{
-		if (this.m_detailsWindow == null)
-		{
-			this.m_detailsWindow = Object.Instantiate(PrefabLoader.Load<DetailsWindow>("details_window"));
-			this.m_detailsWindow.transform.SetParent(this.m_uiParent);
-			this.m_detailsWindow.transform.localScale = Vector2.one;
-			((RectTransform)this.m_detailsWindow.transform).anchoredPosition = Vector3.zero;
-			((RectTransform)this.m_detailsWindow.transform).sizeDelta = Vector2.zero;
-		}
-		this.m_openedWindows.Add(this.m_detailsWindow);
-		this.m_detailsWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
-		this.m_detailsWindow.InitCanvas(this.m_canvas, true);
-		this.m_detailsWindow.Open();
-		return this.m_detailsWindow;
-	}
+	// public DetailsWindow OpenDetailsWindow()
+	// {
+	// 	if (this.m_detailsWindow == null)
+	// 	{
+	// 		this.m_detailsWindow = Object.Instantiate(PrefabLoader.Load<DetailsWindow>("details_window"));
+	// 		this.m_detailsWindow.transform.SetParent(this.m_uiParent);
+	// 		this.m_detailsWindow.transform.localScale = Vector2.one;
+	// 		((RectTransform)this.m_detailsWindow.transform).anchoredPosition = Vector3.zero;
+	// 		((RectTransform)this.m_detailsWindow.transform).sizeDelta = Vector2.zero;
+	// 	}
+	// 	this.m_openedWindows.Add(this.m_detailsWindow);
+	// 	this.m_detailsWindow.transform.SetAsLastSibling();
+	// 	AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+	// 	this.m_detailsWindow.InitCanvas(this.m_canvas, true);
+	// 	this.m_detailsWindow.Open();
+	// 	return this.m_detailsWindow;
+	// }
 
-	public NewInappsWindow OpenInappsWindow()
-	{
-		if (this.m_inappsWindow == null)
-		{
-			this.m_inappsWindow = Object.Instantiate(PrefabLoader.Load<NewInappsWindow>("inapps_window_android"));
-			this.m_inappsWindow.transform.SetParent(this.m_uiParent);
-			this.m_inappsWindow.transform.localScale = Vector2.one;
-			((RectTransform)this.m_inappsWindow.transform).anchoredPosition = Vector3.zero;
-			((RectTransform)this.m_inappsWindow.transform).sizeDelta = Vector2.zero;
-		}
-		this.m_openedWindows.Add(this.m_inappsWindow);
-		this.m_inappsWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
-		this.m_inappsWindow.InitCanvas(this.m_canvas, true);
-		this.m_inappsWindow.Open();
-		return this.m_inappsWindow;
-	}
+	// public NewInappsWindow OpenInappsWindow()
+	// {
+	// 	if (this.m_inappsWindow == null)
+	// 	{
+	// 		this.m_inappsWindow = Object.Instantiate(PrefabLoader.Load<NewInappsWindow>("inapps_window_android"));
+	// 		this.m_inappsWindow.transform.SetParent(this.m_uiParent);
+	// 		this.m_inappsWindow.transform.localScale = Vector2.one;
+	// 		((RectTransform)this.m_inappsWindow.transform).anchoredPosition = Vector3.zero;
+	// 		((RectTransform)this.m_inappsWindow.transform).sizeDelta = Vector2.zero;
+	// 	}
+	// 	this.m_openedWindows.Add(this.m_inappsWindow);
+	// 	this.m_inappsWindow.transform.SetAsLastSibling();
+	// 	AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+	// 	this.m_inappsWindow.InitCanvas(this.m_canvas, true);
+	// 	this.m_inappsWindow.Open();
+	// 	return this.m_inappsWindow;
+	// }
 
 	//public TrialInappsWindow OpenTrialInappsWindow()
 	//{
@@ -339,23 +339,23 @@ public class WindowManager : MonoBehaviour
 	//	return this.m_trialInappsWindow;
 	//}
 
-	public IapPopup OpenAbTestWindow()
-	{
-		if (this.m_abTestWindow == null)
-		{
-			this.m_abTestWindow = Object.Instantiate(PrefabLoader.Load<IapPopup>("ab_test_inapps_window"));
-			this.m_abTestWindow.transform.SetParent(this.m_uiParent);
-			this.m_abTestWindow.transform.localScale = Vector2.one;
-			((RectTransform)this.m_abTestWindow.transform).anchoredPosition = Vector3.zero;
-			((RectTransform)this.m_abTestWindow.transform).sizeDelta = Vector2.zero;
-		}
-		this.m_openedWindows.Add(this.m_abTestWindow);
-		this.m_abTestWindow.transform.SetAsLastSibling();
-		AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
-		this.m_abTestWindow.InitCanvas(this.m_canvas, true);
-		this.m_abTestWindow.Open();
-		return this.m_abTestWindow;
-	}
+	// public IapPopup OpenAbTestWindow()
+	// {
+	// 	if (this.m_abTestWindow == null)
+	// 	{
+	// 		this.m_abTestWindow = Object.Instantiate(PrefabLoader.Load<IapPopup>("ab_test_inapps_window"));
+	// 		this.m_abTestWindow.transform.SetParent(this.m_uiParent);
+	// 		this.m_abTestWindow.transform.localScale = Vector2.one;
+	// 		((RectTransform)this.m_abTestWindow.transform).anchoredPosition = Vector3.zero;
+	// 		((RectTransform)this.m_abTestWindow.transform).sizeDelta = Vector2.zero;
+	// 	}
+	// 	this.m_openedWindows.Add(this.m_abTestWindow);
+	// 	this.m_abTestWindow.transform.SetAsLastSibling();
+	// 	AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+	// 	this.m_abTestWindow.InitCanvas(this.m_canvas, true);
+	// 	this.m_abTestWindow.Open();
+	// 	return this.m_abTestWindow;
+	// }
 
 	private void Update()
 	{
@@ -371,7 +371,7 @@ public class WindowManager : MonoBehaviour
 		if (window.Close())
 		{
 			this.m_openedWindows.Remove(window);
-			AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+			// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 			BaseWindow baseWindow = this.m_openedWindows.Last();
 			baseWindow.SendActiveScreenEvent();
 		}
@@ -382,7 +382,7 @@ public class WindowManager : MonoBehaviour
 		if (window.Close(style))
 		{
 			this.m_openedWindows.Remove(window);
-			AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
+			// AdsWrapper.Instance.OpenedWindowsCountChangedHandler();
 			BaseWindow baseWindow = this.m_openedWindows.Last();
 			baseWindow.SendActiveScreenEvent();
 		}

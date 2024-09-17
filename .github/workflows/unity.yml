@@ -34,13 +34,13 @@ jobs:
           -outputPath ${{ github.workspace }}/Build/WebGL
 
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: WebGL-Build
         path: Build/WebGL
 
     - name: Upload Build Log
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Build-Log
         path: Build-Client.WebGL.log

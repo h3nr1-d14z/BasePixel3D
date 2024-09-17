@@ -1,0 +1,46 @@
+name: Unity WebGL Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Unity
+      uses: game-ci/unity-builder@v2
+      with:
+        unityVersion: 2021.1.17f1
+        targetPlatform: WebGL
+
+    - name: Build Unity project
+      run: |
+        /opt/unity/Editor/Unity \
+          -batchmode \
+          -quit \
+          -executeMethod Build.BuildFromCommandLine \
+          -buildTarget WebGL \
+          -projectPath ${{ github.workspace }} \
+          -logFile ${{ github.workspace }}/Build-Client.WebGL.log \
+          -outputPath ${{ github.workspace }}/Build/WebGL
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: WebGL-Build
+        path: Build/WebGL
+
+    - name: Upload Build Log
+      uses: actions/upload-artifact@v2
+      with:
+        name: Build-Log
+        path: Build-Client.WebGL.log

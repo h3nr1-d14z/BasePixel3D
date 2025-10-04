@@ -596,7 +596,7 @@ public class PositScrollRect : ScrollRect
 			{
 				newDelta = 0f - newDelta;
 			} 
-			this.content.localPosition += new Vector3(newDelta, 0f, 0f);
+			// this.content.localPosition += new Vector3(newDelta, 0f, 0f);
 			this.UpdateScale(false);
 			if (!(Mathf.Abs(newDelta) < 1f))
 			{

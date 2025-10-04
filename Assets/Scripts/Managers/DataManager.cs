@@ -51,12 +51,12 @@ public class DataManager : MonoBehaviour
 	public void Init()
 	{
         AppPathsConfig.InitOnline();
-		this.m_serverConnector.Init();
-		ServerConnector serverConnector = this.m_serverConnector;
-		serverConnector.OnInternetAppeared = (Action)Delegate.Combine(serverConnector.OnInternetAppeared, (Action)delegate
-		{
-			this.OnInternetAppeared.SafeInvoke();
-		});
+		// this.m_serverConnector.Init();
+		// ServerConnector serverConnector = this.m_serverConnector;
+		// serverConnector.OnInternetAppeared = (Action)Delegate.Combine(serverConnector.OnInternetAppeared, (Action)delegate
+		// {
+		// 	this.OnInternetAppeared.SafeInvoke();
+		// });
 	} 
 
 	public void GetImages(bool force, Action<ImagesInfo> handler)
@@ -73,12 +73,12 @@ public class DataManager : MonoBehaviour
 			//{
 			//	this.m_imagesInfo = res;
 			//});
-			base.StartCoroutine(m_serverConnector.GetLocalStreamData((res) =>
-            {
-                Debug.Log("GetImages this.m_imagesInfo = res; count = " + res.Count);
-                this.m_imagesInfo = res;
-                base.StartCoroutine(this.GetImagesListCoroutine(force, handler));
-			}));
+			// base.StartCoroutine(m_serverConnector.GetLocalStreamData((res) =>
+   //          {
+   //              Debug.Log("GetImages this.m_imagesInfo = res; count = " + res.Count);
+   //              this.m_imagesInfo = res;
+   base.StartCoroutine(this.GetImagesListCoroutine(force, handler));
+			// }));
 			//base.StartCoroutine(this.LoadImages(handler));
 		}
 	}
@@ -229,21 +229,21 @@ public class DataManager : MonoBehaviour
             yield return null;
         }
         yield return null;
-        this.m_serverConnector.GetImagesList(delegate (ImagesInfo imagesInfo)         {
-            Debug.Log("GetImagesListCoroutine GetImagesList response");
-            if (imagesInfo != null){
-                Debug.Log("GetImagesListCoroutine GetImagesList response count = " + imagesInfo.Count);
-            }
-            if (imagesInfo != null && this.m_imagesInfo != null)
-            {
-                Debug.Log("GetImagesListCoroutine GetImagesList response OK");
-                int count = this.m_imagesInfo.Images.Count;
-                this.m_imagesInfo = imagesInfo;                 Serializer.SaveToTextFile(AppPathsConfig.DownloadsPath + AppPathsConfig.ImagesFile, imagesInfo, false);                 if (count != imagesInfo.Images.Count)
-                {
-                    handler.SafeInvoke(imagesInfo);
-                }
-            }
-        });         yield return null;
+        // this.m_serverConnector.GetImagesList(delegate (ImagesInfo imagesInfo)         // {
+        //     Debug.Log("GetImagesListCoroutine GetImagesList response");
+        //     if (imagesInfo != null){
+        //         Debug.Log("GetImagesListCoroutine GetImagesList response count = " + imagesInfo.Count);
+        //     }
+        //     if (imagesInfo != null && this.m_imagesInfo != null)
+        //     {
+        //         Debug.Log("GetImagesListCoroutine GetImagesList response OK");
+        //         int count = this.m_imagesInfo.Images.Count;
+        //         this.m_imagesInfo = imagesInfo;         //         Serializer.SaveToTextFile(AppPathsConfig.DownloadsPath + AppPathsConfig.ImagesFile, imagesInfo, false);         //         if (count != imagesInfo.Images.Count)
+        //         {
+        //             handler.SafeInvoke(imagesInfo);
+        //         }
+        //     }
+        // });         // yield return null;
     }
 	private IEnumerator GetImageAssetCoroutine(ImageInfo imageInfo, Action<bool, Texture2D> handler)
 	{
@@ -278,7 +278,8 @@ public class DataManager : MonoBehaviour
 	}
 
     private IEnumerator GetImageAsset3DCoroutine(ImageInfo imageInfo, Action<bool, CashImage3D> handler)
-    {          this.StartCoroutine(this.SearchForLocalFile(imageInfo.Id + ".png.vox", delegate (CashImage3D foundAsset)         {
+    {
+	    this.StartCoroutine(this.SearchForLocalFile(imageInfo.Id + ".png.vox", delegate (CashImage3D foundAsset){
             if (foundAsset != null)
             {
                 handler.SafeInvoke(true, foundAsset);

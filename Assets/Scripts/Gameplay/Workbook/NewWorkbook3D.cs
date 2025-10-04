@@ -80,10 +80,8 @@ public class NewWorkbook3D : BaseWindow
 
 	public void OkButtonClick()
 	{
-		UnitySingleton<ProgressManager>.Instance.SaveWork(delegate (SavedWorkData3D swd)
+		UnitySingleton<ProgressManager>.Instance.SaveWork(delegate 
 		{
-			ShareWindow shareWindow = WindowManager.Instance.OpenShareWindow();
-			shareWindow.Init(swd);
 			AudioManager.Instance.PlayClick();
 			// AdsWrapper.Instance.ShowInterOrRate("end_level");
 		});

@@ -199,7 +199,7 @@ public class MainManager : MonoBehaviour
 	{
 		DeepLinkWrapper.Init();
 		AppPathsConfig.Init();
-		ShareWrapper.Init();
+		// ShareWrapper.Init();
 
 		yield return null;
 		AppData.Init();
@@ -210,7 +210,7 @@ public class MainManager : MonoBehaviour
 		SystemToolsWrapper.GetUid();
 		yield return null;
 
-		DataManager.Instance.Init();
+		// DataManager.Instance.Init();
 		this.m_savedWorksList = new SavedWorksList();
 		this.m_savedWorksList.Init();
 		LocalizationManager.Instance.Init(this.localization.text);
